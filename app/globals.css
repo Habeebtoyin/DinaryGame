@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mobile {
+  display: none;
+}
+
+html {
+  font-size: 95%;
+}
+
+.hero-bg {
+  background-image: url(/assets/images/hero-img.jpg);  
+}
+
+.game-image {
+  width: 100%;
+}
+
+.text {
+  order: 2;
+  padding-top: 40px;
+  width: 440px;
+  font-weight: bold;
+}
+
+.board-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  order: 1;
+  padding: 5px;
+  background-color:#fff5eb ;
+  border-radius: 7px;
+  outline: none;
+  position: relative;
+  display: inline-block;
+}
+
+.board .cell,
+.tile {
+  user-select: none;
+  cursor: default;
+}
+
+
+.cell,
+.tile {
+  width: 100px  ;
+  height: 100px;
+  margin: 5px;
+  line-height: 100px;
+  display: inline-block;
+  font-size: 5px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 7px;
+  font-family: "Clear Sans";
+  color: #766;
+  background-color: #ffe0be;
+}
+
+.tile0 {
+  background-color: #dcb;
+}
+
+.tile3 {
+  background-color: hsl(0, 0%, 93%);
+  background-image: url(/assets/images/3.png);
+}
+
+.tile6 {
+  background-color: #eec;
+  background-image: url(/assets/images/6.png);
+}
+
+.tile12 {
+  color: #ffe;
+  background-image: url(/assets/images/12.png);
+}
+
+.tile24 {
+  color: #ffe;
+  background-image: url(/assets/images/24.png);
+}
+
+.tile48 {
+  color: #ffe;
+  background-image: url(/assets/images/48.png);
+}
+
+.tile96 {
+  color: #ffe;
+  background-image: url(/assets/images/96.png);
+}
+
+.tile192 {
+  color: #ffe;
+  background-image: url(/assets/images/192.png);
+}
+
+.tile384 {
+  color: #ffe;
+  background-image: url(/assets/images/384.png);
+  font-size: 45px;
+}
+
+.tile768 {
+  color: #ffe;
+  background-image: url(/assets/images/768.png);
+  font-size: 45px;
+}
+
+.tile1536 {
+  color: #fff;
+  background-image: url(/assets/images/1536.png);
+  font-size: 35px;
+}
+
+.tile3072 {
+  color: #fff;
+  background-image: url(/assets/images/3072.png);
+  font-size: 35px;
+}
+
+.tile6144 {
+  color: #fff;
+  background-image: url(/assets/images/6144.png);
+  font-size: 35px;
+}
+
+.tile12288 {
+  position: absolute;
+  background-size: contain;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0px;
+  color: #fff;
+  background-image: url(/assets/images/12288.png);
+  font-size: 35px;
+}
+
+.try-again {
+  z-index: 10;
+  height: 100px;
+  width: 100px;
+  background-image: url(/assets/images/try-again.gif);
+}
+
+.tile {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tile.merged {
+  display: none;
+}
+
+.tile.merged.isMoving {
+  display: inline;
+}
+
+.tile.new,
+.overlay {
+  animation-duration: 0.2s;
+  animation-name: newTile;
+  animation-fill-mode: forwards;
+  animation-delay: 0.15s;
+  transform: scale(0);
+}
+
+@keyframes newTile {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  left: 0px;
+  right: 0px;
+  font-size: 55px;
+  font-weight: bolder;
+  border-radius: 7px;
+}
+
+.tryAgain {
+  background-color: #876;
+  color: #fff;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.gameOver {
+  background-size: contain;
+  background-image: url(/assets/images/game-over.gif);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  text-align: center;
+}
+
+.overlay .message {
+  color: #666;
+}
+
+
+
+/* media query for image */
+
+@media screen and (max-width:769px) {
+  
+  html {
+    font-size: 90%;
+  }
+  
+  .mobile {
+    display: block;
+  }
+
+  .desktop, .desktop.middle {
+    display: none;
+  }
+
+  .res-font {
+    font-size: 2rem;
+  }
+
+  .res-pad-in {
+    padding-inline: 5%;
+  }
+  
+  .btn {
+    width: 100%;
+    font-size: .8rem;
+    padding-inline: 1rem;
+  }
+
+  .header {
+    padding-inline: 5%;
+  }
+
+  .logo {
+    width: 30rem;
+  }
+  
+  .middle {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    display: block;
+    border-top: 1px solid rgb(128, 128, 128, .3);
+    border-bottom: 1px solid rgb(128, 128, 128, .3);
+  }
+
+  .hero {
+    margin-top: 3em;
+    padding-top: 2em;
+    padding-inline: 3%;
+  }
+
+  .image {
+    width: 6rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .play.hero h1{
+    text-align: center;
+  }
+
+  .middle .link {
+    display: block;
+    padding: 1em 1.5em;
+  }
+
+  .home-about {
+    margin-block: 2em;
+  }
+
+  .home-about p {
+    text-align: justify;
+    margin-top: .5em;
+  }
+
+  .rank {
+    flex-direction: column;
+  }
+
+  .rank .left, .rank .right {
+    width: 100%;
+  }
+
+  .rank .right {
+    justify-content: center;
+    margin-top: 1em;
+  }
+
+  .board-row {
+    margin: 4px -4px;
+  }
+
+  .cell,
+  .tile {
+  width: 60px  ;
+  height: 60px;
+  line-height: 60px;
+}
+
+}
+
+@media screen and (max-width: 281px) {
+  .cell,
+  .tile {
+    width: 40px  ;
+    height: 40px;
+    line-height: 40px;
+  } 
+}
+
