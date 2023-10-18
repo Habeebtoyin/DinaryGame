@@ -39,7 +39,7 @@ const SubHeaderEndless = () => {
 
             {
                 selected == 'leaderboard' &&
-                <Leaderboard title={"Denary Game Mode Leaderboard"}/>
+                <Leaderboard title={"Endless Game Mode Leaderboard"}/>
             }
 
             {/* Game */}

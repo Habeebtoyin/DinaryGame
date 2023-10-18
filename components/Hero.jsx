@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Hero = () => {
     return (
-        <div className="hero hero-bg bg-cover bg-center mt-[3.7rem] px-[10%] relative text-white min-h-[42vw] flex flex-col items-start justify-center">
+        <div className="hero hero-bg bg-cover max-lg:bg-left bg-center mt-[3.7rem] px-[10%] relative text-white min-h-[42vw] flex flex-col items-start justify-center">
             <p className="text-[1.1rem] font-light">INDICES</p>
             <h1 className="text-[3rem] font-bold my-4">Combine, Challenge, Conquer!</h1>
             <p className="w-[50%] text-left text-[1.2rem] tracking-[.2px] font-light">Welcome to Indices, where numbers meet strategy in the ultimate puzzle games.
