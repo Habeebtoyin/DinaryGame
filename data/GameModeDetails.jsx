@@ -6,7 +6,7 @@ const GameModeDetails = [
         link: "/denary",
         image: "/assets/images/Frame 45.png",
     },
-        ,
+        
     {
         id: 2,
         title: "P V P", 
