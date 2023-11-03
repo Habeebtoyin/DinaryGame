@@ -1,14 +1,17 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useState, useEffect } from "react";
-import UseAuth from "@/hooks/UseAuth";
+import { usePathname } from "next/navigation"
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import UseAuth from "@/hooks/UseAuth";
 
 const Header = () => {
 	const [active, setActive] = useState(false);
     const [playDropdown, setPlayDropdown] = useState(false);
     
+	const pathname = usePathname();
+
     const toggleDropdown = () => {
       setActive((prev) => !prev);
     }
@@ -16,7 +19,7 @@ const Header = () => {
     const togglePlayDropdown = () => {
       setPlayDropdown((prev) => !prev);
     }
-	UseAuth()
+	// UseAuth()
 	
 	
 
@@ -34,7 +37,7 @@ const Header = () => {
 			</div>
 
 			<div className="desktop middle w-[50%] flex justify-around">
-				<Link className="link hover:text-[#0045AD]" href="/">Home</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/' ? 'text-[#0045AD]' : ''}`} href="/">Home</Link>
 				<div className="relative link flex items-center hover:text-[#0045AD] cursor-pointer">Play <i className="bx bx-chevron-down text-[1.2rem] ml-2" onClick={togglePlayDropdown}></i>
 					
 					{
@@ -47,22 +50,22 @@ const Header = () => {
 					}
 
 				</div>
-				<Link className="link hover:text-[#0045AD]" href="/">About</Link>
-				<Link className="link hover:text-[#0045AD]" href="/leaderboard">Leaderboard</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/about' ? 'text-[#0045AD]' : ''}`} href="/">About</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/leaderboard' ? 'text-[#0045AD]' : ''}`} href="/leaderboard">Leaderboard</Link>
 				</div>
 
 			{
 			active && 
 			<div className="mobile middle w-[50%] flex justify-around">
-				<Link className="link" href="/" onClick={toggleDropdown}>Home</Link>
-				<Link className="link" href="/play" onClick={toggleDropdown}>Play</Link>
-				<Link className="link" href="#" onClick={toggleDropdown}>About</Link>
-				<Link className="link" href="/leaderboard" onClick={toggleDropdown}>Leaderboard</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/' ? 'text-[#0045AD]' : ''}`} href="/" onClick={toggleDropdown}>Home</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/play' ? 'text-[#0045AD]' : ''}`} href="/play" onClick={toggleDropdown}>Play</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/about' ? 'text-[#0045AD]' : ''}`} href="/" onClick={toggleDropdown}>About</Link>
+				<Link className={`link hover:text-[#0045AD] ${pathname === '/leaderboard' ? 'text-[#0045AD]' : ''}`} href="/leaderboard" onClick={toggleDropdown}>Leaderboard</Link>
 			</div>
 			}
 
 			<div className="right flex justify-end">
-				<ConnectButton />
+				{/* <ConnectButton /> */}
 			</div>
 
 			<div className="mobile text-[1.7rem]" onClick={toggleDropdown}>

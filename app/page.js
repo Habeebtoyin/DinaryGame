@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
 import HomeAbout from '@/components/HomeAbout'
 import HomeFeatures from '@/components/HomeFeatures'
@@ -10,29 +11,33 @@ export default function Home() {
   return (
     <div>
     
-      {/* Hero Section */}
+      <Layout>
 
-      <Hero />
+        {/* Hero Section */}
 
-      {/* About Section */}
+        <Hero />
 
-      <HomeAbout />
+        {/* About Section */}
 
-      {/* Features section */}
+        <HomeAbout />
 
-      <HomeFeatures />
+        {/* Features section */}
 
-      {/* Game modes section */}
+        <HomeFeatures />
 
-      <GameMode />
+        {/* Game modes section */}
 
-      {/* Get Started Section */}
+        <GameMode />
+
+        {/* Get Started Section */}
+        
+        <HomeGetStarted />
+
+        {/* Leaderboard Section */}
+
+        <Leaderboard title={"All-Time Leaderboard"} heading={"Leaderboard"} subheading={"Game-specific rankings"}/>
       
-      <HomeGetStarted />
-
-      {/* Leaderboard Section */}
-
-      <Leaderboard title={"All-Time Leaderboard"} heading={"Leaderboard"} subheading={"Game-specific rankings"}/>
+      </Layout>
     </div>
   )  
 }
