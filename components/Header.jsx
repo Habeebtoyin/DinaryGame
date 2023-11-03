@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation"
-// import { ConnectButton } from "@rainbow-me/rainbowkit";
-// import UseAuth from "@/hooks/UseAuth";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import UseAuth from "@/hooks/UseAuth";
 
 const Header = () => {
 	const [active, setActive] = useState(false);
@@ -19,7 +19,7 @@ const Header = () => {
     const togglePlayDropdown = () => {
       setPlayDropdown((prev) => !prev);
     }
-	// UseAuth()
+	UseAuth()
 	
 	
 
@@ -65,7 +65,7 @@ const Header = () => {
 			}
 
 			<div className="right flex justify-end">
-				{/* <ConnectButton /> */}
+				<ConnectButton />
 			</div>
 
 			<div className="mobile text-[1.7rem]" onClick={toggleDropdown}>
