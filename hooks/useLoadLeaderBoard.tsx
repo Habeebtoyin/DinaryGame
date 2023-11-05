@@ -1,20 +1,25 @@
 import { getAllData } from "@/sdk/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useLoadLeaderBoard() {
+	const [leaderBoard, setleaderBoard]: any = useState([]);
 	//get all users
 	async function createLeaderBoard() {
 		const allUsers = await getAllData();
-		console.log({ allUsers });
+		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
+		const twentyFourHoursAgoEpochTime = currentEpochTime - 24 * 60 * 60;
+		const thirtyMinutesAgo =
+			Math.floor(new Date().getTime() / 1000) - 300 * 60;
+		const leadGamers = allUsers.GamePassUsers?.filter(
+			(el) => el.updated_at >= thirtyMinutesAgo
+		);
+		console.log({ leadGamers });
+		setleaderBoard((e: any) => [leadGamers, ...e]);
+		return leadGamers;
 	}
-
 	useEffect(() => {
 		createLeaderBoard();
 	}, []);
 
-	// get all scores and time of update
-	//sort out base on time
-	// get the  top 7
-	//save to database
-	//load data from data base
+	return leaderBoard;
 }

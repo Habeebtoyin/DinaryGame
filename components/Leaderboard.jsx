@@ -3,9 +3,11 @@ import React, { Component } from "react";
 import Link from "next/link";
 import LeaderBoardTab from "./LeaderBoardTab";
 import LeaderBoardDetails from "@/data/LeaderBoardDetails";
+import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
 
 export default function Leaderboard({ title, heading, subheading }) {
-	const data = LeaderBoardDetails;
+	const data = useLoadLeaderBoard();
+	//const board=useLoadLeaderBoard()
 
 	return (
 		<div className="max-lg:my-[1em] my-[2em] px-[10%] text-center res-pad-in">
@@ -19,9 +21,13 @@ export default function Leaderboard({ title, heading, subheading }) {
 					</div>
 
 					<div className="rankings">
-						{data.map(({ indexId, ...otherProps }) => (
-							<LeaderBoardTab key={indexId} {...otherProps} />
-						))}
+						{data.length>1?data.map((el,id) => (
+							<>
+							{console.log(el)}
+							<LeaderBoardTab key={id} id={id} Score={el[id].Score} walletAddress={el[id].walletAddress} />
+							</>
+							
+						)):<>Data not Found</>}
 					</div>
 				</div>
 			</div>
