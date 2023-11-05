@@ -21,7 +21,7 @@ const DashboardCard = ({heading, image, amount, linkTitle, link}) => {
                 ) :
 
                 (
-                    <Link href={link} className='inline-block bg-[#0045AD] align-middle text-white px-5 py-2 rounded-[4px]'>{linkTitle}</Link>
+                    <button  className='inline-block bg-[#0045AD] align-middle text-white px-5 py-2 rounded-[4px]'>{linkTitle}</button>
                 )
             }
 

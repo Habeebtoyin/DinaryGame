@@ -1,10 +1,13 @@
+
+"use client"
 import DashboardCards from "../../components/DashboardCards"
 import Activities from "../../components/Activities"
 
 const Dashboard = () => {
+   // UseAuth()
     return (
         <div>
-            <DashboardCards />
+            <DashboardCards /> 
             <Activities />
         </div>
     )
