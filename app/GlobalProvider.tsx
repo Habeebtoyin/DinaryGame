@@ -4,10 +4,13 @@ import { useState } from "react";
 import useApi from "@/hooks/useApi";
 import { type UserGameData } from "@/types/GameTypes";
 import { useAccount } from "wagmi";
+import { useEthersSigner } from "@/sdk/ethersAdapter";
 export function GlobalProvider({ children }: any) {
+	const signer = useEthersSigner();
 	const [text, setText] = useState("");
 	const { isConnected, isConnecting, address } = useAccount();
 	const [userGameData, setUserGameData] = useState<UserGameData>();
+	const [isGameOver, setGameOver] = useState(false);
 	const [moveCounter, setMoveCounter] = useState(
 		parseInt(userGameData?.moveUsed || "0") || 0
 	);
@@ -31,6 +34,9 @@ export function GlobalProvider({ children }: any) {
 				address,
 				moveCounter,
 				setMoveCounter,
+				signer,
+				isGameOver,
+				setGameOver,
 			}}
 		>
 			{children}

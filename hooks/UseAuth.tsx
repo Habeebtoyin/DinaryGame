@@ -4,8 +4,14 @@ import { GameContext } from "./GameContext";
 
 export default function UseAuth() {
 	const [isLoading, setIsLoading] = useState(false);
-	const { isConnected, address } = useAccount();
-	const { auth, setUserGameData } = useContext(GameContext);
+	const {
+		isConnected,
+		address,
+		isConnecting,
+		isDisconnected,
+		isReconnecting,
+	} = useAccount();
+	const { auth, setUserGameData, signer } = useContext(GameContext);
 
 	const Authenticate = async () => {
 		if (isConnected) {
@@ -18,6 +24,16 @@ export default function UseAuth() {
 	}, []);
 
 	useEffect(() => {
-		Authenticate();
-	}, [isLoading]);
+		if (address) {
+			Authenticate();
+		}
+	}, [
+		isLoading,
+		isConnected,
+		address,
+		signer,
+		isConnecting,
+		isDisconnected,
+		isReconnecting,
+	]);
 }

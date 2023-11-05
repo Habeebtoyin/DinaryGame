@@ -1,11 +1,33 @@
+import { GlobalProvider } from "@/app/GlobalProvider"
+import { GameContext } from "@/hooks/GameContext"
+import useUpdateUserOnGameOver from "@/hooks/useUpdateUserOnGameOver"
+import { useContext ,useEffect, useState} from "react"
+
 const GameOverlay = ({onRestart, board}) => {
+        const {moveCounter,
+				setMoveCounter,}=useContext(GameContext)
+    const [counter,setCounter]=useState(0)
+    const {calls}=useUpdateUserOnGameOver()
+
+    useEffect(() => {
+        if(board.hasLost()){
+calls()
+        }
+      
+    
+      
+    }, [moveCounter])
+    
     if(board.hasWon()) {
         return (
             <div className="tile2048"></div>
         )
     }
+    
 
     else if(board.hasLost()) {
+      //  calls()
+  
         return (
             <div className="gameOver">
                 <div className="gameOver">
@@ -15,7 +37,10 @@ const GameOverlay = ({onRestart, board}) => {
                             height: "100%",
                             cursor: "pointer"
                         }}
-                        onClick={onRestart}
+                        onClick={()=>{
+                          //  calls()
+                            onRestart()
+                        }}
                     >
                     
                     </img>

@@ -46,6 +46,7 @@ export async function updateUser(
 		moveBought: string | undefined;
 		Score: string | undefined;
 		moveUsed: string | undefined;
+		TotalScore: string | undefined;
 	}
 ) {
 	const { data, error } = await supabase

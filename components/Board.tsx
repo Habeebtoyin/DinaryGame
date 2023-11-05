@@ -22,6 +22,7 @@ const BoardView = ({ closeGame }: any) => {
 		setMoveCounter,
 	} = useContext(GameContext);
 	const [board, setBoard] = useState(new Board());
+
 	//parseInt(userGameData.moveUsed)
 
 	const handleKeyDown = (event: { keyCode: number }) => {
@@ -43,20 +44,17 @@ const BoardView = ({ closeGame }: any) => {
 				setIsMoveable(true);
 			} else {
 				setMoveCounter((e: any) => e + 1);
-				console.log(moveCounter);
-				console.log(userGameData);
+
 				setBoard(newBoard);
 			}
 		}
 	};
 
 	const onScreenArrowClick = (direction: number) => {
-        if(board.hasWon()) {
-            return
-        }
-
-        else {
-            let boardClone = Object.assign(
+		if (board.hasWon()) {
+			return;
+		} else {
+			let boardClone = Object.assign(
 				Object.create(Object.getPrototypeOf(board)),
 				board
 			);
@@ -68,12 +66,11 @@ const BoardView = ({ closeGame }: any) => {
 				setIsMoveable(true);
 			} else {
 				setMoveCounter((e: any) => e + 1);
-				console.log(moveCounter);
-				console.log(userGameData);
+
 				setBoard(newBoard);
 			}
-        }
-    }
+		}
+	};
 
 	const calls = async () => {
 		await updateUserGameData(userGameData.walletAddress, {
@@ -84,9 +81,10 @@ const BoardView = ({ closeGame }: any) => {
 		setUserGameData(data);
 	};
 	const fetchUserDataCalls = async () => {
-		console.log("users data dshouls be updating here ");
+		//console.log("users data dshouls be updating here ");
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
+		//console.log("to edit ", { data });
 	};
 	useEffect(() => {
 		if (moveCounter >= 31) {
@@ -154,21 +152,33 @@ const BoardView = ({ closeGame }: any) => {
 						{isMoveable && <NoMoves />}
 					</div>
 					<div className="mobile">
-                        <div className="flex gap-3 justify-end items-end mt-4 p-0">
-                            <div className="flex">
-                                <i className="bx bx-chevron-left text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]" onClick={() => onScreenArrowClick(0)}></i>
-                            </div>
+						<div className="flex gap-3 justify-end items-end mt-4 p-0">
+							<div className="flex">
+								<i
+									className="bx bx-chevron-left text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]"
+									onClick={() => onScreenArrowClick(0)}
+								></i>
+							</div>
 
-                            <div className="flex flex-col gap-3">
-                                <i className="bx bx-chevron-up text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]" onClick={() => onScreenArrowClick(1)}></i>
-                                <i className="bx bx-chevron-down text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]" onClick={() => onScreenArrowClick(3)}></i>
-                            </div>
+							<div className="flex flex-col gap-3">
+								<i
+									className="bx bx-chevron-up text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]"
+									onClick={() => onScreenArrowClick(1)}
+								></i>
+								<i
+									className="bx bx-chevron-down text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]"
+									onClick={() => onScreenArrowClick(3)}
+								></i>
+							</div>
 
-                            <div className="flex">
-                                <i className="bx bx-chevron-right text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]" onClick={() => onScreenArrowClick(2)}></i>
-                            </div>
-                        </div>
-                    </div>
+							<div className="flex">
+								<i
+									className="bx bx-chevron-right text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]"
+									onClick={() => onScreenArrowClick(2)}
+								></i>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div
@@ -183,4 +193,3 @@ const BoardView = ({ closeGame }: any) => {
 };
 
 export default BoardView;
-
