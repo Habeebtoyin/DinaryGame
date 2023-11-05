@@ -10,7 +10,7 @@ import Leaderboard from '@/components/Leaderboard'
 export default function Home() {
   return (
     <div>
-    
+
       <Layout>
 
         {/* Hero Section */}
@@ -30,14 +30,14 @@ export default function Home() {
         <GameMode />
 
         {/* Get Started Section */}
-        
+
         <HomeGetStarted />
 
         {/* Leaderboard Section */}
 
-        <Leaderboard title={"All-Time Leaderboard"} heading={"Leaderboard"} subheading={"Game-specific rankings"}/>
-      
+        <Leaderboard title={"All-Time Leaderboard"} heading={"Leaderboard"} subheading={"Game-specific rankings"} />
+
       </Layout>
     </div>
-  )  
+  )
 }
