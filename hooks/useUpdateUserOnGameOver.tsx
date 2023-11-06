@@ -15,28 +15,26 @@ export default function useUpdateUserOnGameOver() {
 		setGameOver,
 	} = useContext(GameContext);
 	const calls = async () => {
-		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
+		// console.log("total", userGameData.TotalScore);
 		let data = await fetchUserGameData(userGameData.walletAddress);
+
+		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
+
 		console.log("here 1", { data });
 		setUserGameData(data);
-		// console.log("total", userGameData.TotalScore);
-
 		await updateUserGameData(userGameData.walletAddress, {
 			TotalScore: parseTotalScore(
-				userGameData.TotalScore,
+				userGameData.TotalScore ? userGameData.TotalScore : 0,
 				userGameData.Score
 			),
 			GameOverScore: userGameData.Score,
 			updated_at: currentEpochTime.toString(),
-		});
-		await updateUserGameData(userGameData.walletAddress, {
 			Score: "0",
 		});
 		data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
 		const { nftReward } = data;
-
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 3000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -48,7 +46,7 @@ export default function useUpdateUserOnGameOver() {
 			}
 		});
 
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 6000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -81,7 +79,7 @@ export default function useUpdateUserOnGameOver() {
 				});
 			}
 		});
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 15000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -103,7 +101,7 @@ export default function useUpdateUserOnGameOver() {
 				});
 			}
 		});
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 21000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -114,7 +112,7 @@ export default function useUpdateUserOnGameOver() {
 				});
 			}
 		});
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 24000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -125,7 +123,7 @@ export default function useUpdateUserOnGameOver() {
 				});
 			}
 		});
-		fetchAandUpdate(async (nftReward: any) => {
+		await fetchAandUpdate(async (nftReward: any) => {
 			if (parseInt(userGameData.TotalScore) >= 27000000) {
 				await updateUserGameData(userGameData.walletAddress, {
 					nftReward: objectModifier(
@@ -172,6 +170,9 @@ export default function useUpdateUserOnGameOver() {
 		}
 		if (scoreInt > 0) {
 			return (scoreInt + parseInt(gameScore)).toString();
+		}
+		if (!score) {
+			parseInt(gameScore).toString();
 		}
 	}
 

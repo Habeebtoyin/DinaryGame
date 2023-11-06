@@ -1,6 +1,6 @@
 import Image from "next/image"
 import AdminNavBarTitle from "./AdminNavBarTitle"
-
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 const AdminNavBar = ({activeUpdate}) => {
     
@@ -44,10 +44,11 @@ const AdminNavBar = ({activeUpdate}) => {
                     <i className="ml-2 bx bx-chevron-down text-[1.2rem]"></i>
                 </div>
             </div>
+            <ConnectButton/>
             
-            <div className="max-lg:block hidden" onClick={toggleDropdown}>
+            {/* <div className="max-lg:block hidden" onClick={toggleDropdown}>
                 <i className="ml-2 bx bx-menu text-[1.5rem]"></i>
-            </div>
+            </div> */}
 
         </div>
     )

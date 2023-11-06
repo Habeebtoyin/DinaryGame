@@ -38,7 +38,7 @@ calls()
                             cursor: "pointer"
                         }}
                         onClick={()=>{
-                          //  calls()
+                            calls()
                             onRestart()
                         }}
                     >

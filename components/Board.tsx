@@ -9,8 +9,14 @@ import NoMoves from "./NoMoves";
 import { useContext } from "react";
 import { GameContext } from "@/hooks/GameContext";
 import { UserGameData } from "@/types/GameTypes";
+import { useAccount } from "wagmi";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
 const BoardView = ({ closeGame }: any) => {
+	const { isConnected } = useAccount();
+	const [isError, setIsError] = useState(false);
+	const [errorMsg, setErrorMsg] = useState("");
 	const {
 		userGameData,
 		setUserGameData,
@@ -26,49 +32,60 @@ const BoardView = ({ closeGame }: any) => {
 	//parseInt(userGameData.moveUsed)
 
 	const handleKeyDown = (event: { keyCode: number }) => {
-		if (board.hasWon()) {
-			return;
-		}
-
-		if (event.keyCode >= 37 && event.keyCode <= 40) {
-			let direction = event.keyCode - 37;
-			let boardClone = Object.assign(
-				Object.create(Object.getPrototypeOf(board)),
-				board
-			);
-			let newBoard = boardClone.move(direction);
-			if (
-				parseInt(userGameData.moveBought) < 1 &&
-				parseInt(userGameData.moveUsed) > 30
-			) {
-				setIsMoveable(true);
-			} else {
-				setMoveCounter((e: any) => e + 1);
-
-				setBoard(newBoard);
+		if (isConnected == true) {
+			setIsError(false);
+			if (board.hasWon()) {
+				return;
 			}
+			if (event.keyCode >= 37 && event.keyCode <= 40) {
+				let direction = event.keyCode - 37;
+				let boardClone = Object.assign(
+					Object.create(Object.getPrototypeOf(board)),
+					board
+				);
+				let newBoard = boardClone.move(direction);
+				if (
+					parseInt(userGameData.moveBought) < 1 &&
+					parseInt(userGameData.moveUsed) > 30
+				) {
+					setIsMoveable(true);
+				} else {
+					setMoveCounter((e: any) => e + 1);
+
+					setBoard(newBoard);
+				}
+			}
+		} else {
+			setErrorMsg("Wallet is Not Connect You can not Play");
+			setIsError(true);
 		}
 	};
 
 	const onScreenArrowClick = (direction: number) => {
-		if (board.hasWon()) {
-			return;
-		} else {
-			let boardClone = Object.assign(
-				Object.create(Object.getPrototypeOf(board)),
-				board
-			);
-			let newBoard = boardClone.move(direction);
-			if (
-				parseInt(userGameData.moveBought) < 1 &&
-				parseInt(userGameData.moveUsed) > 30
-			) {
-				setIsMoveable(true);
+		if (isConnected == true) {
+			setIsError(false);
+			if (board.hasWon()) {
+				return;
 			} else {
-				setMoveCounter((e: any) => e + 1);
+				let boardClone = Object.assign(
+					Object.create(Object.getPrototypeOf(board)),
+					board
+				);
+				let newBoard = boardClone.move(direction);
+				if (
+					parseInt(userGameData.moveBought) < 1 &&
+					parseInt(userGameData.moveUsed) > 30
+				) {
+					setIsMoveable(true);
+				} else {
+					setMoveCounter((e: any) => e + 1);
 
-				setBoard(newBoard);
+					setBoard(newBoard);
+				}
 			}
+		} else {
+			setErrorMsg("Wallet is Not Connect You can not Play");
+			setIsError(true);
 		}
 	};
 
@@ -187,7 +204,14 @@ const BoardView = ({ closeGame }: any) => {
 				>
 					<p>Close Game</p>
 				</div>
+				<Link
+					href={"/dashboard"}
+					className="cursor-pointer mt-3 text-white absolute top-[15%] right-[8%] bg-[#0045AD] px-2 py-1 rounded-[4px]"
+				>
+					<p>My Profile</p>
+				</Link>
 			</div>
+			{isError == true ? toast.error(errorMsg) : <></>}
 		</div>
 	);
 };

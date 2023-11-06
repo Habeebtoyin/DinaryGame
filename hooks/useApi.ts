@@ -23,14 +23,24 @@ export default class useApi {
 		}
 	}
 	async updateUserGameData(address: any, data: any) {
-		await updateUser(address, data);
+		try {
+			console.log("updated success", { data, address });
+			return await updateUser(address, data);
+		} catch (error) {
+			console.log("parent update call ", { data }, { error });
+			return error;
+		}
 	}
 	async fetchUserGameData(address: string) {
 		const userData = await getSpecificUser(address);
 		const { error, GamePassUsers } = userData;
-		if (!error && GamePassUsers) {
+		if (!error && GamePassUsers && GamePassUsers.length > 0) {
 			console.log("user Data Fetched");
+			console.log({ GamePassUsers });
 			return GamePassUsers[0];
+		} else {
+			console.log({ error });
+			return { error: error, msg: "somthing happened" };
 		}
 	}
 }
