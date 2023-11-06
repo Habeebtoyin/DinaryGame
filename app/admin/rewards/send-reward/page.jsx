@@ -27,7 +27,7 @@ const AdminSendRewardForm = () => {
       useEffect(() => {
         
         setTimeout(() => {
-            console.log("Selected Value after timeout:", selectedValue);
+            //console.log("Selected Value after timeout:", selectedValue);
            // toast.success('selectedValue')
            setNftType(selectedValue)
           }, 50);

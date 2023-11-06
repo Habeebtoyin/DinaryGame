@@ -1,14 +1,24 @@
 "use client";
-import React, { Component } from "react";
+import React, { Component,useEffect, useState } from "react";
 import Link from "next/link";
 import LeaderBoardTab from "./LeaderBoardTab";
 import LeaderBoardDetails from "@/data/LeaderBoardDetails";
 import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
 
 export default function Leaderboard({ title, heading, subheading }) {
-	const data = useLoadLeaderBoard();
+	const [leaderboardData,setLeaderBoardData]=useState([])
+	const data = useLoadLeaderBoard()().then(res=>{
+		// console.log({res})
+		setLeaderBoardData(res)
+	});
 	//const board=useLoadLeaderBoard()
-
+	useEffect(() => {
+	  
+		//data()
+	  
+	}, [])
+	
+	 
 	return (
 		<div className="max-lg:my-[1em] my-[2em] px-[10%] text-center res-pad-in">
 			<h1 className="res-font font-bold text-[2.5rem]">{heading}</h1>
@@ -21,13 +31,13 @@ export default function Leaderboard({ title, heading, subheading }) {
 					</div>
 
 					<div className="rankings">
-						{data.length>1?data.map((el,id) => (
+						{leaderboardData.length>0?leaderboardData.map((el,id) => (
 							<>
-							{console.log(el)}
-							<LeaderBoardTab key={id} id={id} Score={el[id].Score} walletAddress={el[id].walletAddress} />
+							{/* {console.log(id,el)} */}
+							 <LeaderBoardTab key={id} id={id} Score={el.GameOverScore} walletAddress={el.walletAddress} />
 							</>
 							
-						)):<>Data not Found</>}
+						)):<>No Data Found</>}
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ import { UserGameData } from "@/types/GameTypes";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const BoardView = ({ closeGame }: any) => {
 	const { isConnected } = useAccount();
@@ -30,6 +31,9 @@ const BoardView = ({ closeGame }: any) => {
 	const [board, setBoard] = useState(new Board());
 
 	//parseInt(userGameData.moveUsed)
+	if (!userGameData) {
+		redirect("/");
+	}
 
 	const handleKeyDown = (event: { keyCode: number }) => {
 		if (isConnected == true) {

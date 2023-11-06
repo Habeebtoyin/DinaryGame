@@ -36,7 +36,7 @@ export default class useApi {
 		const { error, GamePassUsers } = userData;
 		if (!error && GamePassUsers && GamePassUsers.length > 0) {
 			console.log("user Data Fetched");
-			console.log({ GamePassUsers });
+			//console.log({ GamePassUsers });
 			return GamePassUsers[0];
 		} else {
 			console.log({ error });

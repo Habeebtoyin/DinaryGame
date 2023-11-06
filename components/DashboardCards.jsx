@@ -3,11 +3,16 @@ import { useConnect } from 'wagmi'
 import DashboardCard from './DashboardCard'
  import { GameContext } from '@/hooks/GameContext'
 import { useContext } from 'react'
+import { redirect } from 'next/navigation'
 import UseAuth from '@/hooks/UseAuth'
 
 const DashboardCards = () => {
      UseAuth()
+
     const {userGameData}=useContext(GameContext)
+    if (!userGameData) {
+		redirect("/");
+	}
     return (
         <div className="px-[10%] max-lg:px-[5%] max-lg:pt-[3rem] pt-[5rem] pb-[3rem] bg-[#E5EFFF]">
             <div className="py-[1em] grid max-lg:grid-cols-1 grid-cols-3 gap-6 my-[1em]">
