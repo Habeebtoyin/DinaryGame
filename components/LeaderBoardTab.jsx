@@ -1,7 +1,7 @@
 import { trimWalletAddress } from "@/helper/trim"
 
 const LeaderBoardTab = ({ id,  Score, walletAddress }) => {
-    console.log({ id,  Score, walletAddress })
+   /// console.log({ id,  Score, walletAddress })
     return(
         <div className="rank flex justify-between px-[5%] items-center pb-8 mb-8">
             <div className="left flex w-[30%] justify-between items-center">

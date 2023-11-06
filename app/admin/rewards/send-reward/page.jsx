@@ -12,7 +12,7 @@ const AdminSendRewardForm = () => {
 		error, }=useTransferNft()
        const[isError,setIsError]=useState(false)
        const[errorMessage,setErrorMessage]=useState()
-    const {authUserForSending}=useAuthAdmin()
+    const {authUserForSending,reqOnlyAdminAddress}=useAuthAdmin()
     const [to,setTo]=useState()
     const [amount,SetAmount]=useState()
     const[nftType,setNftType]=useState()
@@ -23,6 +23,7 @@ const AdminSendRewardForm = () => {
       };
 
     
+      reqOnlyAdminAddress()
 
       useEffect(() => {
         

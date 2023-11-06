@@ -22,16 +22,16 @@ const AdminLeaderBoardTable = ({data, title}) => {
                        
                         
                         {
-                            data.map((detail, index) => (
+                            data.length>0 && data?data.map((detail, index) => (
                                 <tr className="p-2" key={index}>
-                                    <td className="text-center py-4 max-lg:border-r">{detail[index].id}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail.id}</td>
                                     <td className="text-center py-4 max-lg:border-r">{"Endless"}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{trimWalletAddress(detail[index].walletAddress)}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{detail[index].TotalScore}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{detail[index].amountOfMasterNft||0}</td>
-                                    <td className="text-center py-4 ">{detail[index].amountOfLegendaryNft||0}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{trimWalletAddress(detail.walletAddress)}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail.TotalScore}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail.nftReward.masterNftAmount||0}</td>
+                                    <td className="text-center py-4 ">{detail.nftReward.legendaryNftamount||0}</td>
                                 </tr>
-                            ))
+                            )):<></>
                         }
                                                     
                     </tbody>

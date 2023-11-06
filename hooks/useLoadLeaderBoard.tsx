@@ -13,7 +13,7 @@ export default function useLoadLeaderBoard() {
 		const leadGamers = allUsers.GamePassUsers?.filter(
 			(el) => el.updated_at >= twentyFourHoursAgoEpochTime
 		);
-		console.log({ leadGamers });
+		//console.log({ leadGamers });
 
 		return leadGamers;
 	}

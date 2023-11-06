@@ -10,6 +10,7 @@ export default function Leaderboard({ title, heading, subheading }) {
 	const data = useLoadLeaderBoard()().then(res=>{
 		// console.log({res})
 		setLeaderBoardData(res)
+		
 	});
 	//const board=useLoadLeaderBoard()
 	useEffect(() => {
@@ -31,7 +32,7 @@ export default function Leaderboard({ title, heading, subheading }) {
 					</div>
 
 					<div className="rankings">
-						{leaderboardData.length>0?leaderboardData.map((el,id) => (
+						{leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
 							<>
 							{/* {console.log(id,el)} */}
 							 <LeaderBoardTab key={id} id={id} Score={el.GameOverScore} walletAddress={el.walletAddress} />

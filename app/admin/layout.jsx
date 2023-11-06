@@ -1,15 +1,32 @@
 'use client'
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import AdminSideBar from "@/components/AdminSideBar"
 import AdminNavbar from "@/components/AdminNavBar"
-
+import useAuthAdmin from "@/hooks/useAuthAdmin"
+import { useAccount } from "wagmi"
+import { redirect } from "next/navigation"
 export default function AdminLayout({children}) {
-    
+    const {reqOnlyAdminAddress}=useAuthAdmin()
+    const{address,isConnected}=useAccount()
     const [active, setActive] = useState(false)
 
     const updateActive = (activeState) => {
         setActive(activeState);
     }
+    useEffect(() => {
+        if (isConnected) {
+			const admin = "0xD1b12c10896B908357d5Fb90A15B95312d180c5d";
+			if (
+				address !== admin ||
+				address !== "0xc2a5627Df9Ce0746A6C6c272533c6d9090F035c3"
+			) {
+				redirect("/");
+			}
+		} else {
+			redirect("/");
+		}
+    }, [])
+    
 
     return (
         <div>

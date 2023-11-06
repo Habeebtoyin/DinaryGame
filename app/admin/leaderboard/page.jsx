@@ -5,15 +5,18 @@ import AdminLeaderBoardTable from "@/components/AdminLeaderBoardTable"
 import AdminLeaderboardDetails from "@/data/AdminLeaderboardDetails"
 import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
 const AdminLeaderBoard = () => {
-    const data = useLoadLeaderBoard();
+   
     const [originalData, setOriginalData] = useState([])
     const [storeData, setStoreData] = useState([])
     const [title, setTitle] = useState("All-Time Leaderboard")
 
-    useEffect(() => {
-        setOriginalData(data)
-        setStoreData(data);
-    }, [])
+    const data = useLoadLeaderBoard()().then(res=>{
+        setOriginalData(res)
+        setStoreData(res);
+        return res
+    });
+
+    
 
     const handleFilter = (selected) => {
         if (selected === "all") {
