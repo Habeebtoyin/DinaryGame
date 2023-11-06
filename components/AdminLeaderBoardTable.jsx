@@ -1,3 +1,5 @@
+import { trimWalletAddress } from "@/helper/trim"
+
 const AdminLeaderBoardTable = ({data, title}) => {
     
     return (
@@ -17,16 +19,17 @@ const AdminLeaderBoardTable = ({data, title}) => {
                     </thead>
 
                     <tbody>
+                       
                         
                         {
                             data.map((detail, index) => (
                                 <tr className="p-2" key={index}>
-                                    <td className="text-center py-4 max-lg:border-r">{detail.rank}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{detail.game}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{(detail.wallet)}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{detail.score}</td>
-                                    <td className="text-center py-4 max-lg:border-r">{detail.master}</td>
-                                    <td className="text-center py-4 ">{detail.legendary}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail[index].id}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{"Endless"}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{trimWalletAddress(detail[index].walletAddress)}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail[index].TotalScore}</td>
+                                    <td className="text-center py-4 max-lg:border-r">{detail[index].amountOfMasterNft||0}</td>
+                                    <td className="text-center py-4 ">{detail[index].amountOfLegendaryNft||0}</td>
                                 </tr>
                             ))
                         }

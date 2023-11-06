@@ -9,9 +9,9 @@ export default function useLoadLeaderBoard() {
 		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
 		const twentyFourHoursAgoEpochTime = currentEpochTime - 24 * 60 * 60;
 		const thirtyMinutesAgo =
-			Math.floor(new Date().getTime() / 1000) - 300 * 60;
+			Math.floor(new Date().getTime() / 1000) - 3000 * 60;
 		const leadGamers = allUsers.GamePassUsers?.filter(
-			(el) => el.updated_at >= thirtyMinutesAgo
+			(el) => el.updated_at >= twentyFourHoursAgoEpochTime
 		);
 		console.log({ leadGamers });
 		setleaderBoard((e: any) => [leadGamers, ...e]);

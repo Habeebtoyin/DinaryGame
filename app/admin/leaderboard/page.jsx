@@ -3,16 +3,16 @@ import {useEffect, useState } from "react";
 import AdminFilter from "@/components/AdminFilter"
 import AdminLeaderBoardTable from "@/components/AdminLeaderBoardTable"
 import AdminLeaderboardDetails from "@/data/AdminLeaderboardDetails"
-
+import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
 const AdminLeaderBoard = () => {
-
+    const data = useLoadLeaderBoard();
     const [originalData, setOriginalData] = useState([])
     const [storeData, setStoreData] = useState([])
     const [title, setTitle] = useState("All-Time Leaderboard")
 
     useEffect(() => {
-        setOriginalData(AdminLeaderboardDetails)
-        setStoreData(AdminLeaderboardDetails);
+        setOriginalData(data)
+        setStoreData(data);
     }, [])
 
     const handleFilter = (selected) => {
@@ -22,13 +22,13 @@ const AdminLeaderBoard = () => {
         }
         else {
             const filtered = originalData.filter(item => item.game === selected);
-            setStoreData(filtered);
+            setStoreData(data);
             setTitle(selected);
         } 
     }
 
     const refresh = () => {
-        setStoreData(originalData);
+        setStoreData(data);
         setTitle("All-Time Leaderboard")
     }
 

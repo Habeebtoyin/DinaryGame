@@ -16,7 +16,7 @@ export default function useUpdateUserOnGameOver() {
 	} = useContext(GameContext);
 	const calls = async () => {
 		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
-		const data = await fetchUserGameData(userGameData.walletAddress);
+		let data = await fetchUserGameData(userGameData.walletAddress);
 		console.log("here 1", { data });
 		setUserGameData(data);
 		// console.log("total", userGameData.TotalScore);
@@ -32,22 +32,132 @@ export default function useUpdateUserOnGameOver() {
 		await updateUserGameData(userGameData.walletAddress, {
 			Score: "0",
 		});
-		if (parseInt(userGameData.TotalScore) >= 3000000) {
-			await updateUserGameData(userGameData.walletAddress, {
-				isMasterNftEligibleStage1: true,
-			});
-		}
-		if (parseInt(userGameData.TotalScore) >= 6000000) {
-			await updateUserGameData(userGameData.walletAddress, {
-				isMasterNftEligibleStage2: true,
-			});
-		}
-		if (parseInt(userGameData.TotalScore) >= 9000000) {
-			await updateUserGameData(userGameData.walletAddress, {
-				isMasterNftEligibleStage2: true,
-			});
-		}
+		data = await fetchUserGameData(userGameData.walletAddress);
+		setUserGameData(data);
+		const { nftReward } = data;
+
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 3000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage1",
+						"true"
+					),
+				});
+			}
+		});
+
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 6000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage2",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 9000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage3",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 12000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage4",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 15000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage5",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 18000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage6",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 21000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage7",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 24000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage8",
+						"true"
+					),
+				});
+			}
+		});
+		fetchAandUpdate(async (nftReward: any) => {
+			if (parseInt(userGameData.TotalScore) >= 27000000) {
+				await updateUserGameData(userGameData.walletAddress, {
+					nftReward: objectModifier(
+						nftReward,
+						"isMasterNftEligibleStage9",
+						"true"
+					),
+				});
+			}
+		});
 	};
+
+	//must have burnt 3 nfts
+
+	async function fetchAandUpdate(updateFunction: any) {
+		let data = await fetchUserGameData(userGameData.walletAddress);
+		setUserGameData(data);
+		const { nftReward } = data;
+		await updateFunction(nftReward);
+	}
+
+	function objectModifier(object: any, fieldName: string, value: string) {
+		if (object.hasOwnProperty(fieldName)) {
+			// Update the existing field
+			object[fieldName] = value;
+		} else {
+			// Create a new field
+			object[fieldName] = value;
+		}
+
+		return object;
+	}
 
 	function parseTotalScore(score: string, gameScore: any) {
 		const scoreInt = parseInt(score);

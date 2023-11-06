@@ -23,4 +23,20 @@ export default class GamePassNftContract {
 			}
 		);
 	}
+	async burnNft(_amount: number) {
+		return await this.SignerFactory.burn(
+			await this.signer.getAddress(),
+			1,
+			_amount
+		);
+	}
+	async transferNft(_amount: string, to: string) {
+		return await this.SignerFactory.safeTransferFrom(
+			await this.signer.getAddress(),
+			to,
+			1,
+			_amount,
+			"0x00"
+		);
+	}
 }
