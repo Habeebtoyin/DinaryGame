@@ -19,7 +19,7 @@ const HomeGetStarted = () => {
                         <li className="text-[#464D59]">2. Navigate to play game or click on pay button</li>
                         <li className="text-[#464D59]">3. Swipe in any direction to move tiles on the grid</li>
                         <li className="text-[#464D59]">4. When two tile with the same colors match, they merge into one</li>
-                        <li className="text-[#464D59]">5. Continue merging tiles, and strategically plan your moves to reach the ultimate goal: 8192</li>
+                        <li className="text-[#464D59]">5. Continue merging tiles, and strategically plan your moves to reach the ultimate goal: 12288</li>
                     </ol>
                 </div>
             </div>

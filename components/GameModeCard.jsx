@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from "next/link";
 
-const GameModeCard = ({title, body, link, image}) => {
+const GameModeCard = ({title, body, link, image, mode}) => {
     return (
         <div className="game-card shadow-md rounded-[4px]">        
             <div className="game-img-con">
@@ -20,9 +20,19 @@ const GameModeCard = ({title, body, link, image}) => {
                 </div>
                 
                 <div className="">
-                    <div className="flex justify-start mt-3 ">
-                        <Link href={link} className='bg-[#0045AD] flex align-middle text-white px-5 py-2 rounded-[4px]'>Play Now</Link>
-                    </div>
+                    {
+                        mode == "active" ? (
+                            <div className="flex justify-start mt-3 ">
+                                <Link href={link} className='bg-[#0045AD] flex align-middle text-white px-5 py-2 rounded-[4px]'>Play Now</Link>
+                            </div>
+                        ) : 
+                        
+                        (
+                            <div className="flex justify-start mt-3 ">
+                                <p className='bg-white flex align-middle text-[#0045AD] px-5 py-2 rounded-[4px] border border-[#0045AD]'>Coming Soon</p>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
