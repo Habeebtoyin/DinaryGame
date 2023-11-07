@@ -34,6 +34,14 @@ const BoardView = ({ closeGame }: any) => {
 	if (!userGameData) {
 		redirect("/");
 	}
+	useEffect(() => {
+		if (userGameData) {
+			if (parseInt(userGameData.moveBought) < 1) {
+				setIsMoveable(true);
+			}
+			console.log({ userGameData });
+		}
+	}, []);
 
 	const handleKeyDown = (event: { keyCode: number }) => {
 		if (isConnected == true) {
@@ -97,7 +105,9 @@ const BoardView = ({ closeGame }: any) => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
 			Score: board.score.toString(),
+			moveBought: (parseInt(userGameData.moveBought) - 1).toString(),
 		});
+
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
 	};
@@ -111,7 +121,9 @@ const BoardView = ({ closeGame }: any) => {
 		if (moveCounter >= 31) {
 			setIsMoveable(true);
 		}
-		calls();
+		if (userGameData) {
+			calls();
+		}
 	}, [moveCounter]);
 
 	useEffect(() => {

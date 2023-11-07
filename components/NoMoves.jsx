@@ -34,11 +34,14 @@ const NoMoves = () => {
         setisLoading(!isLoading)
         setIsMoveable(!isMoveable)
         setMoveCounter(0)
-        toast("Wow so easy!")
+        toast("You just Bought MOre Moves")
         console.log("nft bought , updated user moves that have been bought")
         })
         
         //then close window
+       }).catch(err=>{
+       // console.log("buyng nft",JSON.stringify(err))
+       toast.error(JSON.parse(JSON.stringify(err)).info.error.data.message)
        })
     }
     return (
@@ -47,7 +50,7 @@ const NoMoves = () => {
             <div>
                 <div className="flex flex-col gap-2 justify-center items-center bg-white rounded-sm p-8 my-4">
                     <Image
-						src="/assets/images/0x0.webp"
+						src="/assets/images/passNft.jpeg"
 						alt="Dyelum Logo"
 						width={150}
 						height={150}

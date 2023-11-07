@@ -64,7 +64,7 @@ const nautilusTestnet = {
 };
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-	[nautilus, nautilusTestnet, goerli],
+	[nautilus],
 	[publicProvider()]
 );
 
