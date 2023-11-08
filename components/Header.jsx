@@ -9,6 +9,7 @@ import UseAuth from "@/hooks/UseAuth";
 const Header = () => {
 	const [active, setActive] = useState(false);
     const [playDropdown, setPlayDropdown] = useState(false);
+	const [playDropdownMobile, setPlayDropdownMobile] = useState(false);
     
 	const pathname = usePathname();
 
@@ -19,6 +20,10 @@ const Header = () => {
     const togglePlayDropdown = () => {
       setPlayDropdown((prev) => !prev);
     }
+
+	const togglePlayDropdownMobile = () => {
+		setPlayDropdownMobile((prev) => !prev);
+	  }
 	UseAuth()
 	
 	
@@ -60,7 +65,18 @@ const Header = () => {
 			active && 
 			<div className="mobile middle w-[50%] flex justify-around">
 				<Link className={`link hover:text-[#0045AD] ${pathname === '/' ? 'text-[#0045AD]' : ''}`} href="/" onClick={toggleDropdown}>Home</Link>
-				<Link className={`link hover:text-[#0045AD] ${pathname === '/play' ? 'text-[#0045AD]' : ''}`} href="/play" onClick={toggleDropdown}>Play</Link>
+				<div className={`link relative hover:text-[#0045AD] ${pathname === '/denary' ? 'text-[#0045AD]' : ''}`}>Play <i className="bx bx-chevron-down text-[1.2rem] ml-2" onClick={togglePlayDropdownMobile}></i>
+					{
+						playDropdownMobile && 
+						<div className="absolute top-[30%] right-[10%] bg-white border w-[12rem] rounded-md">
+							<Link href="/denary" className="block px-4 py-2 border-b hover:bg-[#0045AD] hover:text-white" onClick={toggleDropdown}>Denary</Link>
+							{/* <Link href="/pvp" className="block px-4 py-2 border-b hover:bg-[#0045AD] hover:text-white" onClick={toggleDropdown}>Player to Player</Link>
+							<Link href="/endless" className="block px-4 py-2 border-b mb-2 hover:bg-[#0045AD] hover:text-white" onClick={toggleDropdown}>Endless Mode</Link> */}
+							<p className="block px-4 py-2 border-b">Player to Player</p>
+							<p className="block px-4 py-2 border-b">Endless Mode</p>
+						</div>
+					}
+				</div>
 				<Link className={`link hover:text-[#0045AD] ${pathname === '/about' ? 'text-[#0045AD]' : ''}`} href="/about" onClick={toggleDropdown}>About</Link>
 				<Link className={`link hover:text-[#0045AD] ${pathname === '/leaderboard' ? 'text-[#0045AD]' : ''}`} href="/leaderboard" onClick={toggleDropdown}>Leaderboard</Link>
 			</div>

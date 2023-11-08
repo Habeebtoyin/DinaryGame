@@ -23,7 +23,7 @@ const PVPHero = () => {
 
                     <div className='w-[22%]'>
                         <div className="flex items-center">
-                            <h1 className="text-[3rem] text-[#0045AD] font-bold">20</h1>
+                            <h1 className="text-[3rem] text-[#0045AD] font-bold">00</h1>
                             <p className="text-[3rem] text-[#0045AD] font-bold max-lg:pl-2 pl-5">:</p>   
                         </div>
                         <p className="text-left text-[1.2rem] text-gray-700 tracking-[.2px] font-normal">hours</p>
@@ -31,7 +31,7 @@ const PVPHero = () => {
 
                     <div className='w-[22%] '>
                         <div className='flex items-center'>
-                            <h1 className="text-[3rem] text-[#0045AD] font-bold">59</h1>
+                            <h1 className="text-[3rem] text-[#0045AD] font-bold">00</h1>
                             <p className="text-[3rem] text-[#0045AD] font-bold max-lg:pl-2 pl-5">:</p>
                         </div>
                         <p className="text-left text-[1.2rem] text-gray-700 tracking-[.2px] font-normal max-lg:hidden">minutes</p>
@@ -39,7 +39,7 @@ const PVPHero = () => {
                     </div>
 
                     <div className='w-[22%] '>
-                        <h1 className="text-[3rem] text-[#0045AD] font-bold">10</h1>
+                        <h1 className="text-[3rem] text-[#0045AD] font-bold">00</h1>
                         <p className="text-left text-[1.2rem] text-gray-700 tracking-[.2px] font-normal">seconds</p>
                     </div>
                 </div>

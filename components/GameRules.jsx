@@ -14,7 +14,7 @@ const GameRules = () => {
 
             <div>
                 <li>The same rules as Denary mode apply, but players are competing against each other in real-time </li>
-                <li>Players commit equal amount of $NAUT to the reward pool, and 95% of the total pooled $ZBC by the two players
+                <li>Players commit equal amount of $ZBC to the reward pool, and 95% of the total pooled $ZBC by the two players
                     is rewarded to the player with the highest scores while the remaining 5% $ZBC is charged as the platform
                     fee
                 </li>

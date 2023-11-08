@@ -34,14 +34,6 @@ const BoardView = ({ closeGame }: any) => {
 	if (!userGameData) {
 		redirect("/");
 	}
-	useEffect(() => {
-		if (userGameData) {
-			if (parseInt(userGameData.moveBought) < 1) {
-				setIsMoveable(true);
-			}
-			console.log({ userGameData });
-		}
-	}, []);
 
 	const handleKeyDown = (event: { keyCode: number }) => {
 		if (isConnected == true) {
@@ -105,9 +97,7 @@ const BoardView = ({ closeGame }: any) => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
 			Score: board.score.toString(),
-			moveBought: (parseInt(userGameData.moveBought) - 1).toString(),
 		});
-
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
 	};
@@ -121,9 +111,7 @@ const BoardView = ({ closeGame }: any) => {
 		if (moveCounter >= 31) {
 			setIsMoveable(true);
 		}
-		if (userGameData) {
-			calls();
-		}
+		calls();
 	}, [moveCounter]);
 
 	useEffect(() => {
@@ -164,15 +152,15 @@ const BoardView = ({ closeGame }: any) => {
 		<div>
 			<div className="board-container">
 				<div>
-					<div className="flex justify-between py-4 mt-4 ">
-						<div
-							className="text-[white] cursor-pointer bg-[#0045AD] px-2 py-1 rounded-[4px]"
-							onClick={onRestart}
-						>
-							Reset Game
+					<div className="flex justify-center py-4 mt-4 ">
+						<div className="text-white bg-[#fda44b] px-2 py-1 rounded-[4px] mr-3">
+							SCORE <br /> {board.score}
 						</div>
-						<div className="text-black">Score: {board.score}</div>
+						<div className="text-[white] cursor-pointer bg-[#fda44b] px-2 py-1 rounded-[4px]">
+							BEST <br /> 3072
+						</div>
 					</div>
+					
 					<div className="board">
 						{cells}
 						{tiles}

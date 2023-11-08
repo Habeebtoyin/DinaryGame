@@ -5,6 +5,7 @@ import HomeFeatures from '@/components/HomeFeatures'
 import GameMode from '@/components/GameMode'
 import HomeGetStarted from '@/components/HomeGetStarted'
 import Leaderboard from '@/components/Leaderboard'
+import UserProfileCard from '@/components/UserProfileCard'
 
 
 export default function Home() {
@@ -36,6 +37,8 @@ export default function Home() {
         {/* Leaderboard Section */}
 
         <Leaderboard title={"All-Time Leaderboard"} heading={"Leaderboard"} subheading={"Game-specific rankings"} />
+
+        {/* <UserProfileCard /> */}
 
       </Layout>
     </div>

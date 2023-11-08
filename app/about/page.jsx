@@ -3,7 +3,7 @@ import HomeFeatures from '@/components/HomeFeatures'
 
 const About = () => {
     return (
-        <div className="">
+        <div className="max-lg:mt-[3.7em]">
             <HomeAbout/>
             <HomeFeatures />
         </div>
