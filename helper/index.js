@@ -97,7 +97,7 @@ class Board {
           var tile2 = currentRow.shift();
           tile2.mergedInto = targetTile;
           targetTile.value += tile2.value;
-          this.score += tile1.value + tile2.value * 70;
+          this.score += tile1.value + tile2.value * 3;
         }
         resultRow[target] = targetTile;
         this.won |= targetTile.value === 12288;
