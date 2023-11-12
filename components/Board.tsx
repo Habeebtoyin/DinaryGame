@@ -157,10 +157,10 @@ const BoardView = ({ closeGame }: any) => {
 							SCORE <br /> {board.score}
 						</div>
 						<div className="text-[white] cursor-pointer bg-[#fda44b] px-2 py-1 rounded-[4px]">
-							BEST <br /> 3072
+							BEST <br /> {userGameData.bestScore}
 						</div>
 					</div>
-					
+
 					<div className="board">
 						{cells}
 						{tiles}
