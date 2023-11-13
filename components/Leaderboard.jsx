@@ -7,17 +7,17 @@ import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
 
 export default function Leaderboard({ title, heading, subheading }) {
 	const [leaderboardData,setLeaderBoardData]=useState([])
-	const data = useLoadLeaderBoard()().then(res=>{
-		// console.log({res})
-		setLeaderBoardData(res)
-		
-	});
-	//const board=useLoadLeaderBoard()
+	const {createLeaderBoard,isLoading} = useLoadLeaderBoard();
 	useEffect(() => {
 	  
-		//data()
+		
+		const interval = setInterval(() => { 
+            createLeaderBoard().then(res=>{
+				setLeaderBoardData(res)
+			}) 
+        }, 50000)
 	  
-	}, [])
+	}, [isLoading])
 	
 	 
 	return (
@@ -32,10 +32,11 @@ export default function Leaderboard({ title, heading, subheading }) {
 					</div>
 
 					<div className="rankings">
-						{leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
+						{console.log(isLoading)}
+						{leaderboardData.length>0 && leaderboardData &&  leaderboardData !=undefined?leaderboardData.map((el,id) => (
 							<>
 							{/* {console.log(id,el)} */}
-							 <LeaderBoardTab key={id} id={id} Score={el.GameOverScore} walletAddress={el.walletAddress} />
+							 <LeaderBoardTab key={id} id={id} Score={el.Score} walletAddress={el.walletAddress} />
 							</>
 							
 						)):<>No Data Found</>}

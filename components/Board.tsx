@@ -29,7 +29,7 @@ const BoardView = ({ closeGame }: any) => {
 		setMoveCounter,
 	} = useContext(GameContext);
 	const [board, setBoard] = useState(new Board());
-
+	const currentEpochTime = Math.floor(new Date().getTime() / 1000);
 	//parseInt(userGameData.moveUsed)
 	if (!userGameData) {
 		redirect("/");
@@ -97,6 +97,7 @@ const BoardView = ({ closeGame }: any) => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
 			Score: board.score.toString(),
+			updated_at: currentEpochTime.toString(),
 		});
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
