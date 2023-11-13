@@ -15,7 +15,7 @@ export default function Leaderboard({ title, heading, subheading }) {
             createLeaderBoard().then(res=>{
 				setLeaderBoardData(res)
 			}) 
-        }, 50000)
+        }, 10000)
 	  
 	}, [isLoading])
 	
@@ -33,7 +33,7 @@ export default function Leaderboard({ title, heading, subheading }) {
 
 					<div className="rankings">
 						{console.log(isLoading)}
-						{leaderboardData.length>0 && leaderboardData &&  leaderboardData !=undefined?leaderboardData.map((el,id) => (
+						{leaderboardData !=undefined && leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
 							<>
 							{/* {console.log(id,el)} */}
 							 <LeaderBoardTab key={id} id={id} Score={el.Score} walletAddress={el.walletAddress} />

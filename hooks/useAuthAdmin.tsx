@@ -21,7 +21,7 @@ export default function useAuthAdmin() {
 	}
 	async function reqOnlyAdminAddress() {
 		if (isConnected) {
-			const admin = "0xD1b12c10896B908357d5Fb90A15B95312d180c5d";
+			const admin = "0x829ceb39FeE0155d63530de02450AbC3b6652602";
 			if (
 				address !== admin ||
 				address !== "0xc2a5627Df9Ce0746A6C6c272533c6d9090F035c3"

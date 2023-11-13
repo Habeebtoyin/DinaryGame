@@ -34,7 +34,7 @@ const NoMoves = () => {
         setisLoading(!isLoading)
         setIsMoveable(!isMoveable)
         setMoveCounter(0)
-        toast("You just Bought MOre Moves")
+        toast("Successful, 30 moves Minted")
         console.log("nft bought , updated user moves that have been bought")
         })
         

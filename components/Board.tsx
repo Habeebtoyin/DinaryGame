@@ -213,7 +213,7 @@ const BoardView = ({ closeGame }: any) => {
 					href={"/dashboard"}
 					className="cursor-pointer mt-3 text-white absolute top-[15%] right-[8%] bg-[#0045AD] px-2 py-1 rounded-[4px]"
 				>
-					<p>My Profile</p>
+					<p>Score and Rewards</p>
 				</Link>
 			</div>
 			{isError == true ? toast.error(errorMsg) : <></>}

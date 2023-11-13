@@ -18,8 +18,19 @@ const DashboardCards = () => {
             <div className="py-[1em] grid max-lg:grid-cols-1 grid-cols-3 gap-6 my-[1em]">
                 {console.log(userGameData)}
                 <DashboardCard heading={"Your Total Score"} image={"/assets/images/Vector1.png"} amount={userGameData.TotalScore?userGameData.TotalScore:0} linkTitle={""} link={"/"} />
-                <DashboardCard heading={"Master NFT"} image={"/assets/images/Vector.png"} amount={userGameData.nftReward.masterNftAmount} linkTitle={"Burn NFT"} link={"/"} />
-                <DashboardCard heading={"Legendary NFT"} image={"/assets/images/Vector.png"} amount={userGameData.nftReward.legendaryNftamount} linkTitle={""} link={"/"}/>
+                <DashboardCard heading={"Master NFT"} image={"/assets/images/Vector.png"} amount={()=>{
+                    if(userGameData.nftReward){
+                       return  userGameData.nftReward.masterNftAmount?userGameData.nftReward.masterNftAmount:0
+                    }
+                    
+                }
+                    } linkTitle={"Burn NFT"} link={"/"} />
+                <DashboardCard heading={"Legendary NFT"} image={"/assets/images/Vector.png"} amount={()=>{
+                    if(userGameData.nftReward){
+                        return userGameData.nftReward.legendaryNftamount?userGameData.nftReward.legendaryNftamount:0
+                    }
+               
+                    }} linkTitle={""} link={"/"}/>
             </div>
         </div>
     )
