@@ -21,10 +21,10 @@ const DashboardCards = () => {
                 <DashboardCard heading={"Master NFT"} image={"/assets/images/Vector.png"} amount={()=>{
                     if(userGameData.nftReward){
                        return  userGameData.nftReward.masterNftAmount?userGameData.nftReward.masterNftAmount:0
-                    }
-                    
-                }
-                    } linkTitle={"Burn NFT"} link={"/"} />
+                    }}
+                    } linkTitle={"Burn NFT"} link={()=>{
+                        if(userGameData.nftReward) return "/"
+                        return null }} />
                 <DashboardCard heading={"Legendary NFT"} image={"/assets/images/Vector.png"} amount={()=>{
                     if(userGameData.nftReward){
                         return userGameData.nftReward.legendaryNftamount?userGameData.nftReward.legendaryNftamount:0

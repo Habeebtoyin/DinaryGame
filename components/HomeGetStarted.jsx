@@ -7,7 +7,7 @@ const HomeGetStarted = () => {
                 <h1 className="res-font font-bold text-[2.5rem] text-left">Guides to get Started</h1>
                 <p className="text-[#464D59]">Indices is more than just a game. It is a journey of numbers and strategy</p>
                 <div className="flex justify-start mt-3">
-                    <Link href="#" className='bg-[#0045AD] flex align-middle text-white px-5 py-2 rounded-[4px]'>Play Now</Link>
+                    <Link href="/denary" className='bg-[#0045AD] flex align-middle text-white px-5 py-2 rounded-[4px]'>Play Now</Link>
                 </div>
             </div>
 
