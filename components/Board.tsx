@@ -96,7 +96,7 @@ const BoardView = ({ closeGame }: any) => {
 	const calls = async () => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
-			Score: board.score.toString(),
+			Score:( parseInt(userGameData.Score.toString()) + parseInt(board.score.toString())).toString(),
 		});
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
@@ -108,9 +108,10 @@ const BoardView = ({ closeGame }: any) => {
 		//console.log("to edit ", { data });
 	};
 	useEffect(() => {
-		if (moveCounter >= 31) {
+		if (moveCounter >= 31 || userGameData.moveBought==="0") {
 			setIsMoveable(true);
 		}
+		
 		calls();
 	}, [moveCounter]);
 
@@ -152,9 +153,9 @@ const BoardView = ({ closeGame }: any) => {
 		<div>
 			<div className="board-container">
 				<div>
-					<div className="flex justify-center py-4 mt-4 ">
+					<div className="flex justify-center py-4 mt-4">
 						<div className="text-white bg-[#fda44b] px-2 py-1 rounded-[4px] mr-3">
-							SCORE <br /> {board.score}
+							SCORE <br /> {userGameData.Score.toString()}
 						</div>
 						<div className="text-[white] cursor-pointer bg-[#fda44b] px-2 py-1 rounded-[4px]">
 							BEST <br /> {userGameData.bestScore}
@@ -172,7 +173,7 @@ const BoardView = ({ closeGame }: any) => {
 
 						{isMoveable && (
 							<NoMoves
-								score={board.score.toString()}
+								score={userGameData.Score.toString()}
 								trackingScore={() => {
 									if (userGameData) {
 										return userGameData.lifeTimeScore
@@ -184,7 +185,7 @@ const BoardView = ({ closeGame }: any) => {
 						)}
 					</div>
 					<div className="mobile">
-						<div className="flex gap-3 justify-end items-end mt-4 p-0">
+						<div className="flex gap-3 justify-end items-end p-0 mt-4">
 							<div className="flex">
 								<i
 									className="bx bx-chevron-left text-black text-[2.2rem] border border-black hover:bg-black hover:text-white rounded-[4px]"

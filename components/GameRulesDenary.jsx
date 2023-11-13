@@ -12,7 +12,7 @@ const GameRulesDenary = () => {
             <h3 className="font-bold my-[.5rem]">Rules:</h3>
 
             <div>
-                <li>In Denary Game is a 4 X 4 grid using 2 values</li>
+                <li>In Denary Game is a 4 X 4 grid using 3 values</li>
                 <li>Each tile has a value which is displayed on the tile
                 </li>
                 <li>Players can merge two tiles of the same value to create a new tile with the value of
