@@ -9,7 +9,7 @@ const Hero = () => {
                 Merge tiles, double values, and aim for the elusive 12288 tile. Are you up for 
                 the challenge?
             </p>
-            <Link href="/play" className='bg-white flex my-[2rem] text-[#0045AD] px-5 py-2 rounded-[4px]'>Play Now</Link>
+            <Link href="/denary" className='bg-white flex my-[2rem] text-[#0045AD] px-5 py-2 rounded-[4px]'>Play Now</Link>
         </div>
     )
 }
