@@ -32,12 +32,15 @@ const Header = () => {
 		<header className="header fixed top-0 right-0 left-0 border-b z-10 bg-white flex justify-between items-center px-[10%] py-2">
 			<div className="left w-[23%] flex items-center">
 				<div className="logo">
-					<Image
+				<Link href="/" >
+				<Image
 						src="/assets/images/indices-logo.png"
 						alt="Dyelum Logo"
 						width={150}
 						height={150}
 					/>
+					</Link>
+					
 				</div>
 			</div>
 

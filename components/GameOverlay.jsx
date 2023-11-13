@@ -1,9 +1,11 @@
 import { GlobalProvider } from "@/app/GlobalProvider"
 import { GameContext } from "@/hooks/GameContext"
+import useGameOverTimeChecker from "@/hooks/useGameOverTimeChecker"
 import useUpdateUserOnGameOver from "@/hooks/useUpdateUserOnGameOver"
 import { useContext ,useEffect, useState} from "react"
 
 const GameOverlay = ({onRestart, board}) => {
+    const{isGameOver,currentTime}=useGameOverTimeChecker()
         const {moveCounter,
 				setMoveCounter,}=useContext(GameContext)
     const [counter,setCounter]=useState(0)
@@ -16,7 +18,8 @@ calls()
       
     
       
-    }, [moveCounter])
+    }, [])
+    
     
     if(board.hasWon()) {
         return (
@@ -25,7 +28,7 @@ calls()
     }
     
 
-    else if(board.hasLost()) {
+    else if(board.hasLost() || isGameOver) {
       //  calls()
   
         return (

@@ -12,15 +12,13 @@ const GameRulesDenary = () => {
             <h3 className="font-bold my-[.5rem]">Rules:</h3>
 
             <div>
-                <li>The Denary Game is a 4 X 4 grid using 2 values</li>
+                <li>In Denary Game is a 4 X 4 grid using 2 values</li>
                 <li>Each tile has a value which is displayed on the tile
                 </li>
                 <li>Players can merge two tiles of the same value to create a new tile with the value of
                     the two tiles that are merged
                 </li>
-                <li>If a player merges two tiles that have a special power up, the power-up will be
-                    activated automatically
-                </li>
+                <li>Denary is a 24-hour event starting at 12pm UTC and ending at 11:59am UTC</li>
                 <li>
                     The game ends when the player fills the entire gameboard with tiles or when the player runs out of moves
                 </li>

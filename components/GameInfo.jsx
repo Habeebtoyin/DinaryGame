@@ -25,8 +25,7 @@ const GameInfo = () => {
     return (
         <div className="text-center px-[10%] max-lg:pt-[.5rem] pt-[2rem] pb-[3rem]">
             <h3 className="font-bold text-[1.2rem]">Join the numbers and get to the 12288 tile!</h3>
-            <li>Use your mouse to click on tiles to merge them. You can also use your
-                keyboard <strong>arrow keys</strong> to move the tiles around the game board
+            <li>Use your mouse to click on tiles to merge them. Use the arrow keys to move the tiles around the game board <strong>arrow keys</strong> to move the tiles around the game board
             </li>
             <li>You can tap on tiles to merge them. You can also swipe tiles to move them around the game board</li>
             {isConnected?<button className="btn my-4 bg-[#0045AD] inline-block text-white px-5 py-2 rounded-[4px] cursor-pointer" disabled={!userGameData?true:false} onClick={()=>{

@@ -9,8 +9,6 @@ export default function Leaderboard({ title, heading, subheading }) {
 	const [leaderboardData,setLeaderBoardData]=useState([])
 	const {createLeaderBoard,isLoading} = useLoadLeaderBoard();
 	useEffect(() => {
-	  
-		
 		const interval = setInterval(() => { 
             createLeaderBoard().then(res=>{
 				setLeaderBoardData(res)
@@ -35,7 +33,7 @@ export default function Leaderboard({ title, heading, subheading }) {
 						{console.log(isLoading)}
 						{leaderboardData !=undefined && leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
 							<>
-							{/* {console.log(id,el)} */}
+							
 							 <LeaderBoardTab key={id} id={id} Score={el.bestScore} walletAddress={el.walletAddress} />
 							</>
 							

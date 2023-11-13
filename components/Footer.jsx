@@ -6,12 +6,15 @@ const Footer = () => {
         <div className="bg-[#E5EFFF] flex justify-between items-center px-[10%] py-6 max-lg:flex-col">
             <div className="left max-lg:w-[100%] w-[23%] flex">
                 <div className="logo">
+                    <Link href="/" >
                     <Image 
                     src="/assets/images/indices-logo.png"
                     alt="Dyelum Logo"
                     width={150}
                     height={150}
                     />
+                    </Link>
+                   
                 </div>
                 {/* <div className="logo-details ml-2 max-lg: w-[80%]">
                     <h3 className="font-bold text-[1.3rem]">Indices</h3>
