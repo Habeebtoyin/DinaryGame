@@ -8,7 +8,7 @@ import { GameContext } from "@/hooks/GameContext";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const NoMoves = () => {
+const NoMoves = ({score,trackingScore}) => {
      const [isLoading, setisLoading] = useState(false)
      const{
         userGameData,
@@ -22,11 +22,13 @@ const NoMoves = () => {
     const provider=useEthersProvider()
     const GamePass= new GamePassNftContract(GAME_PASS_ADDRESS,signer,provider)
     const buyGamePass= async ()=>{
+        const currentEpochTime = Math.floor(new Date().getTime() / 1000);
         setisLoading(!isLoading)
        await  GamePass.BuyMove().then(async (res)=>{
         await updateUserGameData(address.toString(), {
 			moveUsed: "0",
-            moveBought:"30"
+            moveBought:"30",
+            updated_at: currentEpochTime.toString(),
 		}).then(async(res)=>{
         const userData=await fetchUserGameData(address)
        // console.log({userData})

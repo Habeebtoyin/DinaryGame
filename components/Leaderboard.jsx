@@ -36,7 +36,7 @@ export default function Leaderboard({ title, heading, subheading }) {
 						{leaderboardData !=undefined && leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
 							<>
 							{/* {console.log(id,el)} */}
-							 <LeaderBoardTab key={id} id={id} Score={el.Score} walletAddress={el.walletAddress} />
+							 <LeaderBoardTab key={id} id={id} Score={el.bestScore} walletAddress={el.walletAddress} />
 							</>
 							
 						)):<>No Data Found</>}

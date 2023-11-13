@@ -15,6 +15,7 @@ export default class useApi {
 					moveUsed: "0",
 					walletAddress: address,
 					Score: "0",
+					lifeTimeScore: 0,
 				});
 			}
 			console.log("user Authenticated");

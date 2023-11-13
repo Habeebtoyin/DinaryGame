@@ -30,6 +30,7 @@ export async function createUser(data: {
 	walletAddress: AddressLike | undefined | string;
 	Score: string | undefined;
 	moveUsed: string | undefined;
+	lifeTimeScore: number;
 }) {
 	let { data: GamePassUsers, error } = await supabase
 		.from("GamePassUsers")
@@ -61,6 +62,34 @@ export async function updateUser(
 	}
 	//console.log(data);
 	return { data };
+}
+
+export async function updateBoardTimeState(key: string, value: object) {
+	const { data, error } = await supabase
+		.from("LeaderBoardTimer")
+		.update(value)
+		.eq("id", key)
+		.select();
+
+	if (error) {
+		console.log({ error });
+		return { error };
+	}
+	//console.log(data);
+	return { data };
+}
+
+export async function getBoardTimers(id: string | number) {
+	let { data: LeaderBoardTimer, error } = await supabase
+		.from("LeaderBoardTimer")
+		.select("*")
+		.eq("id", id);
+	if (error) {
+		console.log({ error });
+		return { error };
+	}
+	//console.log(data);
+	return { LeaderBoardTimer };
 }
 //get high scores
 //createUser

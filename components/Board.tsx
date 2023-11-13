@@ -97,7 +97,6 @@ const BoardView = ({ closeGame }: any) => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
 			Score: board.score.toString(),
-			updated_at: currentEpochTime.toString(),
 		});
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
@@ -171,7 +170,18 @@ const BoardView = ({ closeGame }: any) => {
 
 						{/* {JSON.stringify(board.hasLost())} */}
 
-						{isMoveable && <NoMoves />}
+						{isMoveable && (
+							<NoMoves
+								score={board.score.toString()}
+								trackingScore={() => {
+									if (userGameData) {
+										return userGameData.lifeTimeScore
+											? userGameData.lifeTimeScore
+											: 0;
+									}
+								}}
+							/>
+						)}
 					</div>
 					<div className="mobile">
 						<div className="flex gap-3 justify-end items-end mt-4 p-0">

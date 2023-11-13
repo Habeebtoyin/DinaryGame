@@ -15,11 +15,13 @@ export default function useLoadLeaderBoard() {
 		let leadGamers = allUsers.GamePassUsers?.filter(
 			(el) =>
 				el.updated_at >= twentyFourHoursAgoEpochTime &&
-				parseInt(el.Score) > 0
+				parseInt(el.bestScore) > 0
 		);
 		console.log({ leadGamers });
 		if (leadGamers && leadGamers.length > 0 && leadGamers != undefined) {
-			leadGamers.sort((a, b) => parseInt(b.Score) - parseInt(a.Score));
+			leadGamers.sort(
+				(a, b) => parseInt(b.bestScore) - parseInt(a.bestScore)
+			);
 		}
 		setIsLoading(false);
 		return leadGamers;

@@ -30,10 +30,11 @@ export default function useUpdateUserOnGameOver() {
 			GameOverScore: userGameData.Score,
 			updated_at: currentEpochTime.toString(),
 			Score: "0",
-			bestScore:
-				userGameData.bestScore >= userGameData.Score
-					? userGameData.bestScore
-					: userGameData.Score,
+			bestScore: (parseInt(userGameData.bestScore) >=
+			parseInt(userGameData.Score)
+				? parseInt(userGameData.bestScore)
+				: parseInt(userGameData.Score)
+			).toString(),
 		});
 		data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
