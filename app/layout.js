@@ -10,18 +10,18 @@ import Providers from './Providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Dyelum',
-  description: 'Dyelum',
+  title: 'Dyleum',
+  description: 'Dyleum',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-   <head>
-   <link rel="icon" href="/favicon.png" sizes="any" />
-   <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-   </head>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
 
       <body className={inter.className}>
         <Providers>

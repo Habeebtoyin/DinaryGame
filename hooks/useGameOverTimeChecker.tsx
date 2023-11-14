@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 export default function useGameOverTimeChecker() {
 	const [currentTime, setCurrentTime] = useState(new Date());
 	const [isGameOver, setIsGameOver] = useState(false);
+	const [hasClickTrayAgain, setAsClickTryAgain] = useState(false);
+
 	useEffect(() => {
 		// Update the current time every second
 		const intervalId = setInterval(() => {
@@ -23,7 +25,12 @@ export default function useGameOverTimeChecker() {
 
 			if (currentHour === 12 && currentMinutes === 0) {
 				// Perform your rendering logic here
-				setIsGameOver(true);
+				if (hasClickTrayAgain) {
+					setIsGameOver(false);
+				} else {
+					setIsGameOver(true);
+				}
+
 				console.log("Rendering at 12 PM");
 			}
 		};
@@ -40,5 +47,5 @@ export default function useGameOverTimeChecker() {
 		};
 	}, [currentTime]);
 
-	return { isGameOver, currentTime };
+	return { isGameOver, currentTime, setIsGameOver, setAsClickTryAgain };
 }

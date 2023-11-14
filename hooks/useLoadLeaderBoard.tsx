@@ -17,7 +17,7 @@ export default function useLoadLeaderBoard() {
 				el.updated_at >= twentyFourHoursAgoEpochTime &&
 				parseInt(el.bestScore) > 0
 		);
-		console.log({ leadGamers });
+		// console.log({ leadGamers });
 		if (leadGamers && leadGamers.length > 0 && leadGamers != undefined) {
 			leadGamers.sort(
 				(a, b) => parseInt(b.bestScore) - parseInt(a.bestScore)

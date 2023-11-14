@@ -13,8 +13,10 @@ import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import useUpdateUserOnGameOver from "@/hooks/useUpdateUserOnGameOver";
 
 const BoardView = ({ closeGame }: any) => {
+	const gameOverUpdate = useUpdateUserOnGameOver();
 	const { isConnected } = useAccount();
 	const [isError, setIsError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
@@ -48,6 +50,7 @@ const BoardView = ({ closeGame }: any) => {
 					board
 				);
 				let newBoard = boardClone.move(direction);
+				console.log("mover here");
 				if (
 					parseInt(userGameData.moveBought) < 1 &&
 					parseInt(userGameData.moveUsed) > 30
@@ -96,7 +99,10 @@ const BoardView = ({ closeGame }: any) => {
 	const calls = async () => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
-			Score:( parseInt(userGameData.Score.toString()) + parseInt(board.score.toString())).toString(),
+			Score: (
+				parseInt(userGameData.Score.toString()) +
+				parseInt(board.score.toString())
+			).toString(),
 		});
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
@@ -108,12 +114,14 @@ const BoardView = ({ closeGame }: any) => {
 		//console.log("to edit ", { data });
 	};
 	useEffect(() => {
-		if (moveCounter >= 31 || userGameData.moveBought==="0") {
+		if (moveCounter >= 31 || userGameData.moveBought === "0") {
 			setIsMoveable(true);
 		}
-		
-		calls();
 	}, [moveCounter]);
+	useEffect(() => {
+		console.log("score change");
+		calls();
+	}, [board.score]);
 
 	useEffect(() => {
 		fetchUserDataCalls();
@@ -142,6 +150,7 @@ const BoardView = ({ closeGame }: any) => {
 	};
 
 	const CloseGameInner = () => {
+		gameOverUpdate.calls();
 		// reset game boad
 		onRestart();
 
