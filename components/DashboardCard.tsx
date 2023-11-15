@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const DashboardCard = ({ heading, image, amount, linkTitle, link }) => {
+const DashboardCard = ({
+	heading,
+	image,
+	amount,
+	linkTitle,
+	link,
+	callFunction,
+}: any) => {
 	return (
 		<div className="game-card shadow-md rounded-[4px] p-6 bg-white">
 			<div className="flex justify-between items-center">
@@ -18,7 +25,10 @@ const DashboardCard = ({ heading, image, amount, linkTitle, link }) => {
 			{linkTitle === "" ? (
 				""
 			) : (
-				<button className="inline-block bg-[#0045AD] align-middle text-white px-5 py-2 rounded-[4px]">
+				<button
+					onClick={callFunction}
+					className="inline-block bg-[#0045AD] align-middle text-white px-5 py-2 rounded-[4px]"
+				>
 					{linkTitle}
 				</button>
 			)}

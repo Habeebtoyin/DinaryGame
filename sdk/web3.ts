@@ -49,4 +49,33 @@ export default class GamePassNftContract {
 	async claimSBT() {
 		return await this.SoulBoundfFactory.safeMint();
 	}
+	async SBTBalance(address: string) {
+		return await this.SoulBoundfFactory.balanceOf(address);
+	}
+	async ownerOf(id: string) {
+		return await this.SoulBoundfFactory.ownerOf(id);
+	}
+	async totalSupply() {
+		return (await this.SoulBoundfFactory.totalSupply()).toString();
+	}
+	async tokenByIndex(id: number) {
+		return parseInt(
+			(await this.SoulBoundfFactory.tokenByIndex(id)).toString()
+		);
+	}
+	async getAlltokensByOwner() {
+		let userNft = [];
+		const addy = await this.signer.getAddress();
+		const _totalSupply = parseInt(await this.totalSupply());
+		// console.log({ addy, _totalSupply });
+		for (let index = 0; index < _totalSupply; index++) {
+			const tokenId = await this.tokenByIndex(index);
+			const nft = await this.ownerOf(tokenId.toString());
+			if (nft.toString() == addy) {
+				userNft.push(tokenId);
+			}
+		}
+
+		return userNft;
+	}
 }
