@@ -22,7 +22,9 @@ export default function useClaimNfts(userGameData: any) {
 
 	const calls = async () => {
 		return await updateUserGameData(userGameData.walletAddress, {
-			TotalScore: (parseInt(userGameData.TotalScore) - 5000).toString(),
+			TotalScore: (
+				parseInt(userGameData.TotalScore) - 5000000
+			).toString(),
 		});
 	};
 	const callsUpdate = async (data: string, field: string) => {

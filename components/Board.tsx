@@ -20,6 +20,7 @@ const BoardView = ({ closeGame }: any) => {
 	const { isConnected } = useAccount();
 	const [isError, setIsError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
+	const [newScore, setNewScore] = useState(0);
 	const {
 		userGameData,
 		setUserGameData,
@@ -118,19 +119,24 @@ const BoardView = ({ closeGame }: any) => {
 		setUserGameData(data);
 		//console.log("to edit ", { data });
 	};
+
+	useEffect(() => {
+		fetchUserDataCalls();
+	}, []);
+	useEffect(() => {
+		console.log("score change", board.score);
+		calls();
+	}, [board.score]);
 	useEffect(() => {
 		if (moveCounter >= 31 || userGameData.moveBought === "0") {
 			setIsMoveable(true);
 			callsInMovable();
 		}
+
+		console.log("here", board.score);
 	}, [moveCounter]);
 	useEffect(() => {
-		console.log("score change", board.score);
-		calls();
-	}, [board.score]);
-
-	useEffect(() => {
-		fetchUserDataCalls();
+		board.setScore(parseInt(userGameData.Score));
 	}, []);
 
 	useEvent(isMoveable, "keydown", handleKeyDown);
