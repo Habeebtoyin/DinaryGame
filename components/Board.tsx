@@ -96,13 +96,18 @@ const BoardView = ({ closeGame }: any) => {
 		}
 	};
 
+	const callsInMovable = async () => {
+		await updateUserGameData(userGameData.walletAddress, {
+			moveBought: "0",
+		});
+		const data = await fetchUserGameData(userGameData.walletAddress);
+		setUserGameData(data);
+	};
+
 	const calls = async () => {
 		await updateUserGameData(userGameData.walletAddress, {
 			moveUsed: moveCounter.toString(),
-			Score: (
-				parseInt(userGameData.Score.toString()) +
-				parseInt(board.score.toString())
-			).toString(),
+			Score: parseInt(board.score.toString()).toString(),
 		});
 		const data = await fetchUserGameData(userGameData.walletAddress);
 		setUserGameData(data);
@@ -116,10 +121,11 @@ const BoardView = ({ closeGame }: any) => {
 	useEffect(() => {
 		if (moveCounter >= 31 || userGameData.moveBought === "0") {
 			setIsMoveable(true);
+			callsInMovable();
 		}
 	}, [moveCounter]);
 	useEffect(() => {
-		console.log("score change");
+		console.log("score change", board.score);
 		calls();
 	}, [board.score]);
 
@@ -150,7 +156,7 @@ const BoardView = ({ closeGame }: any) => {
 	};
 
 	const CloseGameInner = () => {
-		gameOverUpdate.calls();
+		// gameOverUpdate.calls();
 		// reset game boad
 		onRestart();
 

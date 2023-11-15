@@ -29,7 +29,7 @@ const DashboardCards = () => {
 	} = useClaimNfts(userGameData);
 	useEffect(() => {
 		console.log({ masterBalance });
-		if (masterBalance == 2) {
+		if (masterBalance == 3) {
 			setMasterBurn(true);
 		} else {
 			setMasterBurn(false);
@@ -56,7 +56,11 @@ const DashboardCards = () => {
 			if (userGameData) {
 				const { TotalScore } = userGameData;
 				console.log({ TotalScore });
-				if (TotalScore && parseInt(TotalScore) >= 50) {
+				if (
+					TotalScore &&
+					parseInt(TotalScore) >= 5000000 &&
+					isMaster == false
+				) {
 					setNftMintable(true);
 				} else {
 					setNftMintable(false);
@@ -86,11 +90,10 @@ const DashboardCards = () => {
 					amount={
 						userGameData.TotalScore ? userGameData.TotalScore : 0
 					}
-					linkTitle={isNftMintable ? "Claim Master Nft" : ""}
+					linkTitle={isMaster ? "Claim Master Nft" : ""}
 					callFunction={async () =>
 						await claimMasterNft().then((res) => {
-							console.log({ isNftMintable });
-							setMasterBurn(!isNftMintable);
+							setMaster(false);
 							return res;
 						})
 					}
