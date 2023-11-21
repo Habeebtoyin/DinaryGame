@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 import UseAuth from "@/hooks/UseAuth";
 import useClaimNfts from "@/hooks/useClaimNfts";
+import ModalContainer from "./modal/ModalContainer";
 import { toast } from "react-toastify";
 const DashboardCards = () => {
 	const [isMaster, setMaster] = useState(false);
@@ -15,8 +16,17 @@ const DashboardCards = () => {
 	const [legendBalance, setLegendBalance] = useState(0);
 	UseAuth();
 
-	const { userGameData, setUserGameData, fetchUserGameData } =
-		useContext(GameContext);
+	const {
+		userGameData,
+		setUserGameData,
+		fetchUserGameData,
+		burnMasternftModal,
+		setBurnMasterNftModal,
+		mintLegendNftModal,
+		setMintLegendNftModal,
+		mintMasternftModal,
+		setMintMasterNftModal,
+	} = useContext(GameContext);
 	const {
 		claimLegendNft,
 		claimMasterNft,
@@ -97,11 +107,7 @@ const DashboardCards = () => {
 							? "Claim Indices Master NFT"
 							: ""
 					}
-					callFunction={async () =>
-						await claimMasterNft().then((res) => {
-							return res;
-						})
-					}
+					callFunction={async () => setMintMasterNftModal(true)}
 					link={""}
 				/>
 				<DashboardCard
@@ -113,7 +119,9 @@ const DashboardCards = () => {
 						if (userGameData.nftReward) return "";
 						return null;
 					}}
-					callFunction={isMasterBurn ? () => burnNft() : ""}
+					callFunction={
+						isMasterBurn ? () => setBurnMasterNftModal(true) : ""
+					}
 				/>
 
 				<DashboardCard
@@ -124,16 +132,18 @@ const DashboardCards = () => {
 					callFunction={
 						isLegend
 							? async () => {
-									claimLegendNft().then((res) =>
-										setLegend(false)
-									);
+									setMintLegendNftModal(true);
 							  }
 							: () => null
 					}
 					link={""}
 				/>
 			</div>
-			{/* {isSucess && toast.success("Transaction Successful")} */}
+			{mintLegendNftModal || mintMasternftModal || burnMasternftModal ? (
+				<ModalContainer />
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };

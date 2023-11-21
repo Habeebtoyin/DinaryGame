@@ -11,6 +11,9 @@ export function GlobalProvider({ children }: any) {
 	const { isConnected, isConnecting, address } = useAccount();
 	const [userGameData, setUserGameData] = useState<UserGameData>();
 	const [isGameOver, setGameOver] = useState(false);
+	const [mintMasternftModal, setMintMasterNftModal] = useState(false);
+	const [mintLegendNftModal, setMintLegendNftModal] = useState(false);
+	const [burnMasternftModal, setBurnMasterNftModal] = useState(false);
 	const [moveCounter, setMoveCounter] = useState(
 		parseInt(userGameData?.moveUsed || "0") || 0
 	);
@@ -37,6 +40,12 @@ export function GlobalProvider({ children }: any) {
 				signer,
 				isGameOver,
 				setGameOver,
+				burnMasternftModal,
+				setBurnMasterNftModal,
+				mintLegendNftModal,
+				setMintLegendNftModal,
+				mintMasternftModal,
+				setMintMasterNftModal,
 			}}
 		>
 			{children}

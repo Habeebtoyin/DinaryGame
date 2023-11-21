@@ -26,7 +26,7 @@ export default function useClaimNfts(userGameData: any) {
 		});
 	};
 	const callsUpdate = async (data: string, field: string) => {
-		await updateUserGameData(userGameData.walletAddress, {
+		return await updateUserGameData(userGameData.walletAddress, {
 			nftReward: objectModifier(userGameData.nftReward, field, data),
 		});
 	};
@@ -54,7 +54,7 @@ export default function useClaimNfts(userGameData: any) {
 	}
 	async function claimLegendNft() {
 		SetIsLoading(true);
-		await SoulLegend.claimSBT()
+		return await SoulLegend.claimSBT()
 			.then(async (res) => {
 				SetIsLoading(false);
 				SetIsSuccess(true);
@@ -95,6 +95,7 @@ export default function useClaimNfts(userGameData: any) {
 		if (counter >= 1) {
 			await callsUpdate("true", "masterNftBurnt");
 		}
+		return ids;
 	}
 	async function MasternftBalance() {
 		return await SoulMaster.SBTBalance(address?.toString()!);
