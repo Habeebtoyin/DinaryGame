@@ -22,9 +22,7 @@ export default function useClaimNfts(userGameData: any) {
 
 	const calls = async () => {
 		return await updateUserGameData(userGameData.walletAddress, {
-			TotalScore: (
-				parseInt(userGameData.TotalScore) - 5000000
-			).toString(),
+			TotalScore: (parseInt(userGameData.TotalScore) - 500).toString(),
 		});
 	};
 	const callsUpdate = async (data: string, field: string) => {
@@ -39,7 +37,7 @@ export default function useClaimNfts(userGameData: any) {
 			.then(async (res) => {
 				SetIsLoading(false);
 				SetIsSuccess(true);
-				toast.success("Soulbound Nft Claimed");
+				toast.success(" Master NFT Claimed");
 				console.log({ res });
 				SetIsSuccess(true);
 				calls();
@@ -60,7 +58,7 @@ export default function useClaimNfts(userGameData: any) {
 			.then(async (res) => {
 				SetIsLoading(false);
 				SetIsSuccess(true);
-				toast.success("Soulbound Nft Claimed");
+				toast.success(" Legendary NFT Claimed");
 				console.log({ res });
 				await callsUpdate("false", "masterNftBurnt");
 				SetIsSuccess(false);
@@ -75,6 +73,7 @@ export default function useClaimNfts(userGameData: any) {
 			});
 	}
 	async function burnNft() {
+		let counter = 0;
 		const ids = await SoulMaster.getAlltokensByOwner();
 		for (let index = 0; index < ids.length; index++) {
 			const element = ids[index];
@@ -83,7 +82,7 @@ export default function useClaimNfts(userGameData: any) {
 					toast.success(
 						`Master SoulBound Nft with Token Id: ${element} has been burnt`
 					);
-					await callsUpdate("true", "masterNftBurnt");
+					counter++;
 				})
 				.catch(async (err) => {
 					await callsUpdate("false", "masterNftBurnt");
@@ -92,6 +91,9 @@ export default function useClaimNfts(userGameData: any) {
 						"Error Occured while burnning! Check Gas and Try Again"
 					);
 				});
+		}
+		if (counter >= 1) {
+			await callsUpdate("true", "masterNftBurnt");
 		}
 	}
 	async function MasternftBalance() {

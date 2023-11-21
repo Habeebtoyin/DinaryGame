@@ -28,9 +28,10 @@ const DashboardCards = () => {
 		burnNft,
 	} = useClaimNfts(userGameData);
 	useEffect(() => {
-		console.log({ masterBalance });
-		if (masterBalance == 3) {
+		console.log({ isLegend });
+		if (masterBalance >= 2) {
 			setMasterBurn(true);
+			setMaster(true);
 		} else {
 			setMasterBurn(false);
 		}
@@ -53,16 +54,15 @@ const DashboardCards = () => {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
+			calls();
 			if (userGameData) {
 				const { TotalScore } = userGameData;
-				console.log({ TotalScore });
-				if (
-					TotalScore &&
-					parseInt(TotalScore) >= 5000000 &&
-					isMaster == false
-				) {
+				console.log(1, { TotalScore });
+				if (TotalScore && parseInt(TotalScore) >= 500) {
+					console.log("true");
 					setNftMintable(true);
 				} else {
+					console.log("false");
 					setNftMintable(false);
 				}
 			}
@@ -73,6 +73,8 @@ const DashboardCards = () => {
 				console.log({ res });
 				setMasterBalance(parseInt(res.toString()));
 			});
+
+			console.log();
 		}, 1000);
 
 		return () => clearInterval(interval);
@@ -90,10 +92,13 @@ const DashboardCards = () => {
 					amount={
 						userGameData.TotalScore ? userGameData.TotalScore : 0
 					}
-					linkTitle={isMaster ? "Claim Master Nft" : ""}
+					linkTitle={
+						isNftMintable && isMaster == false
+							? "Claim Indices Master NFT"
+							: ""
+					}
 					callFunction={async () =>
 						await claimMasterNft().then((res) => {
-							setMaster(false);
 							return res;
 						})
 					}
@@ -110,12 +115,21 @@ const DashboardCards = () => {
 					}}
 					callFunction={isMasterBurn ? () => burnNft() : ""}
 				/>
+
 				<DashboardCard
 					heading={"Legendary NFT"}
 					image={"/assets/images/Vector.png"}
 					amount={legendBalance}
-					linkTitle={isLegend ? "Claim Legend Nft" : ""}
-					callFunction={isLegend && claimLegendNft}
+					linkTitle={isLegend ? "Mint 1 NFT" : ""}
+					callFunction={
+						isLegend
+							? async () => {
+									claimLegendNft().then((res) =>
+										setLegend(false)
+									);
+							  }
+							: () => null
+					}
 					link={""}
 				/>
 			</div>

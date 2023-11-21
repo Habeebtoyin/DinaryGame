@@ -10,8 +10,8 @@ import Providers from './Providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Dyleum',
-  description: 'Dyleum',
+  title: 'Dyleum Test',
+  description: 'Dyleum Test',
 }
 
 export default function RootLayout({ children }) {
