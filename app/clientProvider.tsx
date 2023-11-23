@@ -71,13 +71,13 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
 const projectId = "f48efad0c8c0c6656fbb202708700e4d";
 
 const { wallets } = getDefaultWallets({
-	appName: "Dyelum",
+	appName: "Dyleum",
 	projectId,
 	chains,
 });
 
 const demoAppInfo = {
-	appName: "Dyelum",
+	appName: "Dyleum",
 };
 
 const connectors = connectorsForWallets([

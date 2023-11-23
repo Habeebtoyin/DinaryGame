@@ -3,6 +3,7 @@ import ClaimUi from "../ClaimUi";
 import MintIndicesModal from "./MintIndicesModal";
 import { GameContext } from "@/hooks/GameContext";
 import BurnModal from "./BurnModal";
+import ClaimEthModal from "./ClaimEthModal";
 export default function ModalContainer() {
 	const {
 		userGameData,
@@ -33,7 +34,10 @@ export default function ModalContainer() {
 			{mintMasternftModal && (
 				<MintIndicesModal userGameData={userGameData} />
 			)}
-			{burnMasternftModal && <BurnModal />}
+			{burnMasternftModal && <BurnModal userGameData={userGameData} />}
+			{mintLegendNftModal && (
+				<ClaimEthModal userGameData={userGameData} />
+			)}
 		</div>
 	);
 }

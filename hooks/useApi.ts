@@ -36,7 +36,7 @@ export default class useApi {
 		const userData = await getSpecificUser(address);
 		const { error, GamePassUsers } = userData;
 		if (!error && GamePassUsers && GamePassUsers.length > 0) {
-			console.log("user Data Fetched");
+			//	console.log("user Data Fetched");
 			//console.log({ GamePassUsers });
 			return GamePassUsers[0];
 		} else {

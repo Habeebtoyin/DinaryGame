@@ -20,7 +20,7 @@ const ClaimUiComp = ({
 				{image && (
 					<Image
 						src="/assets/images/Frame82.png"
-						alt="Dyelum img"
+						alt="Dyleum img"
 						width={80}
 						height={80}
 						className="rounded-sm mt-[.2em]"

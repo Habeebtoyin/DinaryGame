@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ClaimUiComp from "../ClaimUiComp";
 import useClaimNfts from "@/hooks/useClaimNfts";
 import LoadingModal from "./LoadingModal";
 import SuccessModal from "./SuccessModal";
 import ErrorModal from "./ErrorModal";
+import { GameContext } from "@/hooks/GameContext";
 
 export default function BurnModal({ userGameData }: any) {
 	const [txState, settxState] = useState("NO_TX");
+	const {
+		setUserGameData,
+		fetchUserGameData,
+		burnMasternftModal,
+		setBurnMasterNftModal,
+		mintLegendNftModal,
+		setMintLegendNftModal,
+		amountOfMasterToBurn,
+		amountOfLegenfToMint,
+	} = useContext(GameContext);
 	const {
 		claimLegendNft,
 		claimMasterNft,
@@ -17,14 +28,14 @@ export default function BurnModal({ userGameData }: any) {
 		isSucess,
 		burnNft,
 	} = useClaimNfts(userGameData);
+	async function afterBurnCallBack() {
+		settxState("SUCESSFUL");
+		setMintLegendNftModal(true);
+	}
 	async function handleMint() {
 		settxState("LOADING");
-		await burnNft()
-			.then((res) => {
-				if (res) {
-					settxState("SUCESSFUL");
-				}
-			})
+		await burnNft(() => afterBurnCallBack())
+			.then((res) => {})
 			.catch((err) => {
 				if (err) {
 					settxState("ERROR_OCCURED");
@@ -38,14 +49,20 @@ export default function BurnModal({ userGameData }: any) {
 					image="l"
 					linkName="Mint Now"
 					actionFunction={handleMint}
-					desc="Burn your 3 Indices Master NFTs to claim 1 Indices Legendary NFT"
-					title="Get 1 ETH and 1 Legendary NFT"
+					desc={`Burn your ${amountOfMasterToBurn} Indices Master NFTs to claim ${amountOfLegenfToMint} Indices Legendary NFT`}
+					title={`Get ${
+						amountOfMasterToBurn == 3 || amountOfMasterToBurn == 9
+							? 1
+							: 3
+					} ${
+						amountOfMasterToBurn == 9 ? "BTC" : "ETH"
+					} and ${amountOfLegenfToMint} Legendary NFT`}
 				/>
 			)}
 			{txState === "LOADING" && <LoadingModal />}
-			{txState === "SUCESSFUL" && (
+			{/* {txState === "SUCESSFUL" && (
 				<SuccessModal desc="You have sucessfully burnt this nfts" />
-			)}
+			)} */}
 			{txState === "ERROR_OCCURRED" && <ErrorModal />}
 		</>
 	);

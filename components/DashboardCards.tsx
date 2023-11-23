@@ -26,6 +26,9 @@ const DashboardCards = () => {
 		setMintLegendNftModal,
 		mintMasternftModal,
 		setMintMasterNftModal,
+		setAmountOfLegendToMint,
+		setAmountOfMasterToBurn,
+		amountOfLegenfToMint,
 	} = useContext(GameContext);
 	const {
 		claimLegendNft,
@@ -37,9 +40,29 @@ const DashboardCards = () => {
 		isSucess,
 		burnNft,
 	} = useClaimNfts(userGameData);
+	async function HandleAmounts() {
+		if (masterBalance == 3) {
+			setAmountOfLegendToMint(1);
+			setAmountOfMasterToBurn(3);
+		} else if (masterBalance == 6) {
+			setAmountOfLegendToMint(3);
+			setAmountOfMasterToBurn(6);
+		} else if (masterBalance == 9) {
+			setAmountOfLegendToMint(5);
+			setAmountOfMasterToBurn(9);
+		} else {
+			return null;
+		}
+	}
 	useEffect(() => {
-		console.log({ isLegend });
-		if (masterBalance >= 2) {
+		//console.log({ isLegend });
+		if (masterBalance == 3) {
+			setMasterBurn(true);
+			setMaster(true);
+		} else if (masterBalance == 6) {
+			setMasterBurn(true);
+			setMaster(true);
+		} else if (masterBalance == 9) {
 			setMasterBurn(true);
 			setMaster(true);
 		} else {
@@ -60,6 +83,7 @@ const DashboardCards = () => {
 	};
 	useEffect(() => {
 		calls();
+		console.log({ amountOfLegenfToMint });
 	}, [isLegend, isMasterBurn, isNftMintable]);
 
 	useEffect(() => {
@@ -67,12 +91,12 @@ const DashboardCards = () => {
 			calls();
 			if (userGameData) {
 				const { TotalScore } = userGameData;
-				console.log(1, { TotalScore });
+				//	console.log(1, { TotalScore });
 				if (TotalScore && parseInt(TotalScore) >= 500) {
-					console.log("true");
+					//	console.log("true");
 					setNftMintable(true);
 				} else {
-					console.log("false");
+					//	console.log("false");
 					setNftMintable(false);
 				}
 			}
@@ -80,11 +104,9 @@ const DashboardCards = () => {
 				setLegendBalance(parseInt(res.toString()));
 			});
 			MasternftBalance().then((res) => {
-				console.log({ res });
+				//console.log({ res });
 				setMasterBalance(parseInt(res.toString()));
 			});
-
-			console.log();
 		}, 1000);
 
 		return () => clearInterval(interval);
@@ -102,12 +124,11 @@ const DashboardCards = () => {
 					amount={
 						userGameData.TotalScore ? userGameData.TotalScore : 0
 					}
-					linkTitle={
-						isNftMintable && isMaster == false
-							? "Claim Indices Master NFT"
-							: ""
-					}
-					callFunction={async () => setMintMasterNftModal(true)}
+					linkTitle={isNftMintable ? "Claim Indices Master NFT" : ""}
+					callFunction={async () => {
+						setMintMasterNftModal(true);
+						HandleAmounts();
+					}}
 					link={""}
 				/>
 				<DashboardCard
@@ -120,7 +141,12 @@ const DashboardCards = () => {
 						return null;
 					}}
 					callFunction={
-						isMasterBurn ? () => setBurnMasterNftModal(true) : ""
+						isMasterBurn
+							? () => {
+									setBurnMasterNftModal(true);
+									HandleAmounts();
+							  }
+							: ""
 					}
 				/>
 
@@ -128,7 +154,7 @@ const DashboardCards = () => {
 					heading={"Legendary NFT"}
 					image={"/assets/images/Vector.png"}
 					amount={legendBalance}
-					linkTitle={isLegend ? "Mint 1 NFT" : ""}
+					linkTitle={""}
 					callFunction={
 						isLegend
 							? async () => {

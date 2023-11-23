@@ -20,10 +20,20 @@ export default function MintIndicesModal({ userGameData }: any) {
 	async function handleMint() {
 		settxState("LOADING");
 		await claimMasterNft()
-			.then((res) => {
-				settxState("SUCESSFUL");
+			.then((res: any) => {
+				// console.log(
+				// 	"here here",
+				// 	JSON.parse(JSON.stringify(res)).info.error
+				// );
+				//console.log({ error, isLoading, isSucess });
+				if (!JSON.parse(JSON.stringify(res)).info.error) {
+					settxState("SUCESSFUL");
+				} else {
+					settxState("ERROR_OCCURED");
+				}
 			})
 			.catch((err) => {
+				console.log("here 4", { err });
 				settxState("ERROR_OCCURED");
 			});
 	}

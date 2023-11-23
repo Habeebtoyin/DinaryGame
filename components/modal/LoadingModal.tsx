@@ -6,7 +6,7 @@ export default function LoadingModal() {
 			linkName=""
 			title="Transaction Has been submitted "
 			actionFunction={() => null}
-			desc=""
+			desc="Loading .....  Please Wait"
 			image=""
 		/>
 	);

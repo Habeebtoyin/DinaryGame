@@ -14,6 +14,8 @@ export function GlobalProvider({ children }: any) {
 	const [mintMasternftModal, setMintMasterNftModal] = useState(false);
 	const [mintLegendNftModal, setMintLegendNftModal] = useState(false);
 	const [burnMasternftModal, setBurnMasterNftModal] = useState(false);
+	const [amountOfLegenfToMint, setAmountOfLegendToMint] = useState(0);
+	const [amountOfMasterToBurn, setAmountOfMasterToBurn] = useState(0);
 	const [moveCounter, setMoveCounter] = useState(
 		parseInt(userGameData?.moveUsed || "0") || 0
 	);
@@ -46,6 +48,10 @@ export function GlobalProvider({ children }: any) {
 				setMintLegendNftModal,
 				mintMasternftModal,
 				setMintMasterNftModal,
+				amountOfLegenfToMint,
+				setAmountOfLegendToMint,
+				amountOfMasterToBurn,
+				setAmountOfMasterToBurn,
 			}}
 		>
 			{children}
