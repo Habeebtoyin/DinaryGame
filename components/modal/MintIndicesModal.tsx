@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ClaimUiComp from "../ClaimUiComp";
 import useClaimNfts from "@/hooks/useClaimNfts";
 import SuccessModal from "./SuccessModal";
 import LoadingModal from "./LoadingModal";
 import ErrorModal from "./ErrorModal";
+import { GameContext } from "@/hooks/GameContext";
 export default function MintIndicesModal({ userGameData }: any) {
 	const [txState, settxState] = useState("NO_TX");
 	const {
@@ -16,6 +17,16 @@ export default function MintIndicesModal({ userGameData }: any) {
 		isSucess,
 		burnNft,
 	} = useClaimNfts(userGameData);
+	const {
+		setUserGameData,
+		fetchUserGameData,
+		burnMasternftModal,
+		setBurnMasterNftModal,
+		mintLegendNftModal,
+		setMintLegendNftModal,
+		mintMasternftModal,
+		setMintMasterNftModal,
+	} = useContext(GameContext);
 
 	async function handleMint() {
 		settxState("LOADING");
@@ -33,9 +44,12 @@ export default function MintIndicesModal({ userGameData }: any) {
 				}
 			})
 			.catch((err) => {
-				console.log("here 4", { err });
-				settxState("ERROR_OCCURED");
+				// console.log("here 4", { err });
+				// settxState("ERROR_OCCURED");
 			});
+		setMintMasterNftModal(false);
+		setMintLegendNftModal(false);
+		setBurnMasterNftModal(false);
 	}
 	return (
 		<div>

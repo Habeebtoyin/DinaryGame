@@ -91,6 +91,18 @@ export async function getBoardTimers(id: string | number) {
 	//console.log(data);
 	return { LeaderBoardTimer };
 }
+
+export async function getAllTimeLeaderBoardSnapshot() {
+	let { data: TransactionsSnapShot, error } = await supabase
+		.from("TransactionsSnapShot")
+		.select("*");
+	if (error) {
+		console.log({ error });
+		return { error };
+	}
+
+	return { TransactionsSnapShot };
+}
 //get high scores
 //createUser
 //update User

@@ -38,12 +38,16 @@ export default function ClaimEthModal({ userGameData }: any) {
 				console.log("success");
 				settxState("SUCESSFUL");
 			})
+			.then((res) => {
+				settxState("null");
+			})
 			.catch((err) => {
 				if (err) {
 					settxState("ERROR_OCCURED");
 				}
 			});
 	}
+	const mapper: any = { 3: [1, 1], 6: [3, 3], 9: [1, 5] };
 	return (
 		<>
 			{txState == "NO_TX" && (
@@ -55,19 +59,25 @@ export default function ClaimEthModal({ userGameData }: any) {
 						amountOfMasterToBurn == 3 || amountOfMasterToBurn == 9
 							? 1
 							: 3
-					} ${amountOfMasterToBurn == 9 ? "BTC" : "ETH"}`}
-					title={`Claim your ${
+					} ${amountOfMasterToBurn == 9 ? "BTC" : "ETH"}/ ${
+						mapper[amountOfMasterToBurn][1]
+					} Legendary NFTs`}
+					title={`Claim  ${
 						amountOfMasterToBurn == 3 || amountOfMasterToBurn == 9
 							? 1
 							: 3
 					} ${
 						amountOfMasterToBurn == 9 ? "BTC" : "ETH"
-					} for burning ${amountOfMasterToBurn} Indices Master NFTs`}
+					}/NFT  for burning ${amountOfMasterToBurn}  Master NFTs`}
 				/>
 			)}
 			{txState === "LOADING" && <LoadingModal />}
 			{txState === "SUCESSFUL" && (
-				<SuccessModal desc="You have successfully claimed BTC/NFTs" />
+				<SuccessModal
+					desc={`You have successfully claimed ${
+						amountOfMasterToBurn == 9 ? "BTC" : "ETH"
+					}/NFTs`}
+				/>
 			)}
 			{txState === "ERROR_OCCURRED" && <ErrorModal />}
 		</>

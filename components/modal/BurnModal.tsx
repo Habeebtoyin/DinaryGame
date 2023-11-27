@@ -38,7 +38,7 @@ export default function BurnModal({ userGameData }: any) {
 			.then((res) => {})
 			.catch((err) => {
 				if (err) {
-					settxState("ERROR_OCCURED");
+					//	settxState("ERROR_OCCURED");
 				}
 			});
 	}
@@ -47,7 +47,7 @@ export default function BurnModal({ userGameData }: any) {
 			{txState == "NO_TX" && (
 				<ClaimUiComp
 					image="l"
-					linkName="Mint Now"
+					linkName="Burn Now"
 					actionFunction={handleMint}
 					desc={`Burn your ${amountOfMasterToBurn} Indices Master NFTs to claim ${amountOfLegenfToMint} Indices Legendary NFT`}
 					title={`Get ${
@@ -63,7 +63,7 @@ export default function BurnModal({ userGameData }: any) {
 			{/* {txState === "SUCESSFUL" && (
 				<SuccessModal desc="You have sucessfully burnt this nfts" />
 			)} */}
-			{txState === "ERROR_OCCURRED" && <ErrorModal />}
+			{/* {txState === "ERROR_OCCURRED" && <ErrorModal />} */}
 		</>
 	);
 }

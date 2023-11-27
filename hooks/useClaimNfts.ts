@@ -120,6 +120,12 @@ export default function useClaimNfts(userGameData: any) {
 	async function MasternftBalance() {
 		return await SoulMaster.SBTBalance(address?.toString()!);
 	}
+	async function userMasterNftBalance(_address: string) {
+		return await SoulMaster.SBTBalance(_address?.toString()!);
+	}
+	async function userLegendNftBalance(_address: string) {
+		return await SoulLegend.SBTBalance(_address?.toString()!);
+	}
 	async function LegendNftBalance() {
 		return await SoulLegend.SBTBalance(address?.toString()!);
 	}
@@ -150,5 +156,7 @@ export default function useClaimNfts(userGameData: any) {
 		isLoading,
 		isSucess,
 		burnNft,
+		userMasterNftBalance,
+		userLegendNftBalance,
 	};
 }
