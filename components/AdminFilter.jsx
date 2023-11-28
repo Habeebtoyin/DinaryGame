@@ -44,7 +44,7 @@ const AdminFilter = ({onFilter, onRefresh}) => {
                 </div>
             }
 
-{
+            {
                 pathname === '/admin/rewards' &&
                 <div className="flex justify-end items-center">
                     <div>Filter By</div>
