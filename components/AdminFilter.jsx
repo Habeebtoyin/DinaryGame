@@ -23,7 +23,8 @@ const AdminFilter = ({onFilter, onRefresh}) => {
                             <option value="Endless">Endless</option>
                         </select>
                     </div>
-                    <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div>
+                    {/* <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div> */}
+                    <input className="bg-white outline-none p-1 px-2 rounded-sm" type="date" />
                 </div>
             }
 
@@ -38,7 +39,8 @@ const AdminFilter = ({onFilter, onRefresh}) => {
                             <option value="Legendary">Legendary NFT</option>
                         </select>
                     </div>
-                    <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div>
+                    {/* <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div> */}
+                    <input className="bg-white outline-none p-1 px-2 rounded-sm" type="date" />
                 </div>
             }
 
@@ -56,7 +58,8 @@ const AdminFilter = ({onFilter, onRefresh}) => {
                             <option value="LEUM">LEUM</option>
                         </select>
                     </div>
-                    <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div>
+                    {/* <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div> */}
+                    <input className="bg-white outline-none p-1 px-2 rounded-sm" type="date" />
                 </div>
             }
         </div>
