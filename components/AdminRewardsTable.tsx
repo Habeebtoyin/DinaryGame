@@ -1,10 +1,7 @@
 import { trimWalletAddress } from "@/helper/trim";
-import { GameContext } from "@/hooks/GameContext";
-import useClaimNfts from "@/hooks/useClaimNfts";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const AdminLeaderBoardTable = ({ data, title }: any) => {
-	const { userGameData } = useContext(GameContext);
+const AdminRewardsTable = ({ data, title }: any) => {
 	const [sortedData, setSortedData] = useState([]);
 
 	useEffect(() => {
@@ -14,33 +11,36 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 			}
 
 			console.log(data);
-		}, 10000);
+		}, 1000);
 	}, [data]);
 
 	return (
 		<div>
 			<div className="min-w-full bg-white p-2 px-4 border rounded-[5px] mt-5 max-lg:overflow-scroll">
-				<h2 className="font-bold text-[1.2rem]">{title}</h2>
+				<h2 className="font-bold text-[1.2rem]">{`${title} Rewards`}</h2>
 				<table className="min-w-full bg-white p-11 mt-4">
 					<thead>
 						<tr className="border-b border-gray-300">
 							<th className="font-semibold text-[#6E7887] pb-3 px-2">
-								Rank
-							</th>
-							<th className="font-semibold text-[#6E7887] pb-3">
-								Game Mode
+								S/N
 							</th>
 							<th className="font-semibold text-[#6E7887] pb-3">
 								Wallet Address
 							</th>
 							<th className="font-semibold text-[#6E7887] pb-3">
-								Score
+								Reward Type
 							</th>
 							<th className="font-semibold text-[#6E7887] pb-3">
-								Minted Master NFT
+								Quantity
 							</th>
 							<th className="font-semibold text-[#6E7887] pb-3">
-								Minted Legendary NFT
+								Status
+							</th>
+							<th className="font-semibold text-[#6E7887] pb-3">
+								Date
+							</th>
+							<th className="font-semibold text-[#6E7887] pb-3">
+								Time
 							</th>
 						</tr>
 					</thead>
@@ -53,27 +53,31 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 										{index + 1}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{"Endless"}
-									</td>
-									<td className="text-center py-4 max-lg:border-r">
 										{trimWalletAddress(
 											detail.walletAddress
 										)}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{detail.Score}
+										{"rewrad"}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{detail.masterBalance}
+										{0}
+									</td>
+									<td className="text-center py-4 max-lg:border-r">
+										{"sent"}
+									</td>
+									<td className="text-center py-4 max-lg:border-r">
+										{"date"}
 									</td>
 									<td className="text-center py-4 ">
-										{detail.masterBalance}
+										{"time"}
 									</td>
 								</tr>
 							))
 						) : (
-							<>Data not Found</>
+							<></>
 						)}
+						{}
 					</tbody>
 				</table>
 			</div>
@@ -81,4 +85,4 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 	);
 };
 
-export default AdminLeaderBoardTable;
+export default AdminRewardsTable;
