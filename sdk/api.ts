@@ -103,6 +103,19 @@ export async function getAllTimeLeaderBoardSnapshot() {
 
 	return { TransactionsSnapShot };
 }
+export async function getLeaderBoardforTime(date: string) {
+	let url = `/api/leaderboard/${date}`;
+
+	let options = {
+		method: "GET",
+		headers: { "User-Agent": "insomnia/8.4.5" },
+	};
+
+	return await fetch(url, options)
+		.then((res) => res.json())
+		.then((json) => json)
+		.catch((err) => console.error("error:" + err));
+}
 //get high scores
 //createUser
 //update User

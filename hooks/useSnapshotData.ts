@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getAllTimeLeaderBoardSnapshot } from "@/sdk/api";
-export default function useSnapshotData() {
-	const [data, setData] = useState([{}]);
-	const [error, setError] = useState();
+import {
+	getAllTimeLeaderBoardSnapshot,
+	getLeaderBoardforTime,
+} from "@/sdk/api";
+import useSWR from "swr";
+const fetcher = (time: string) =>
+	getLeaderBoardforTime(time).then((res) => res);
+export default function useSnapshotData(time: string) {
+	const { data, error, isLoading } = useSWR(`${time}`, fetcher);
 
-	async function handleFetchData() {
-		return await getAllTimeLeaderBoardSnapshot()
-			.then((res) => {
-				setData(res.TransactionsSnapShot!);
-				return res;
-			})
-			.catch((err) => {
-				console.log(err);
-				setError(err);
-				return err;
-			});
-	}
-	useEffect(() => {
-		handleFetchData();
-	}, [error]);
-
-	return { handleFetchData, data, setData, setError, error };
+	return { data, error, isLoading };
 }

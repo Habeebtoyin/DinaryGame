@@ -7,40 +7,15 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 	const { userGameData } = useContext(GameContext);
 	const { userMasterNftBalance, userLegendNftBalance } =
 		useClaimNfts(userGameData);
+	const [sortedData, setSortedData] = useState([]);
 
-	// async function getLegendBalance(addy:string) {
-	// 	return ((await userLegendNftBalance(addy)).toString())
-	// }
-	const [sortedData, setSortedData]: any = useState<any[]>([]);
-	async function handleSnapshotFilter(data: any) {
-		if (data) {
-			//console.log("data", { data });
-			let filteredData = data.filter((el: any) => {
-				let snaps = el.snaps;
-				snaps = snaps.filter((e: any) => parseInt(e.Score) > 0);
-
-				snaps.sort(
-					(a: any, b: any) => parseInt(b.Score) - parseInt(a.Score)
-				);
-				//	console.log({ snaps });
-				setSortedData(snaps);
-				return snaps;
-			});
-			// filteredData.concat(snaps);
-
-			//filteredData = [].concat(...filteredData);
-			//	console.log({ filteredData });
-			//setSortedData(filteredData[0].snaps.filter((e: any) => parseInt(e.Score) > 0));
-			return filteredData;
-		}
-	}
 	useEffect(() => {
 		setInterval(async () => {
-			const d = await handleSnapshotFilter(data);
-			// console.log({ d });
-			// if (d) {
-			// 	setSortedData(d[0]);
-			// }
+			if (data) {
+				setSortedData(data);
+			}
+
+			console.log(data);
 		}, 10000);
 	}, [data]);
 
@@ -73,12 +48,11 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 					</thead>
 
 					<tbody>
-						{console.log({ sortedData })}
 						{sortedData != null ? (
 							sortedData.map((detail: any, index: any) => (
 								<tr className="p-2" key={index}>
 									<td className="text-center py-4 max-lg:border-r">
-										{detail.id}
+										{index + 1}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
 										{"Endless"}
@@ -92,20 +66,15 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 										{detail.Score}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{detail.nftReward
-											? detail.nftReward.masterNftAmount
-											: 0}
+										{detail.masterBalance}
 									</td>
 									<td className="text-center py-4 ">
-										{detail.nftReward
-											? detail.nftReward
-													.legendaryNftamount
-											: 0}
+										{detail.masterBalance}
 									</td>
 								</tr>
 							))
 						) : (
-							<></>
+							<>Data not Found</>
 						)}
 					</tbody>
 				</table>

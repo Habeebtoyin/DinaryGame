@@ -19,7 +19,11 @@ export function GlobalProvider({ children }: any) {
 	const [moveCounter, setMoveCounter] = useState(
 		parseInt(userGameData?.moveUsed || "0") || 0
 	);
+	const denom = 1000 * 60 * 60 * 24;
 	const [isMoveable, setIsMoveable] = useState(false);
+	const [filterTime, setFilterTime] = useState(
+		(new Date().getTime() / denom).toFixed(0)
+	);
 	const { auth, updateUserGameData, fetchUserGameData } = new useApi();
 
 	return (
@@ -52,6 +56,8 @@ export function GlobalProvider({ children }: any) {
 				setAmountOfLegendToMint,
 				amountOfMasterToBurn,
 				setAmountOfMasterToBurn,
+				filterTime,
+				setFilterTime,
 			}}
 		>
 			{children}
