@@ -116,6 +116,19 @@ export async function getLeaderBoardforTime(date: string) {
 		.then((json) => json)
 		.catch((err) => console.error("error:" + err));
 }
+export async function getRewardBoardforTime(date: string) {
+	let url = `/api/rewards/${date}`;
+
+	let options = {
+		method: "GET",
+		headers: { "User-Agent": "insomnia/8.4.5" },
+	};
+
+	return await fetch(url, options)
+		.then((res) => res.json())
+		.then((json) => json)
+		.catch((err) => console.error("error:" + err));
+}
 //get high scores
 //createUser
 //update User

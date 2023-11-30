@@ -10,6 +10,21 @@ const JsonProvider = new ethers.JsonRpcProvider(
 
 const MasterFactory = SoulBound__factory.connect(MASTER_NFT, JsonProvider);
 const LegendaryFactory = SoulBound__factory.connect(LEGENDRY_NFT, JsonProvider);
+function handleTime(epochTime: number) {
+	const date = new Date(epochTime * 1000);
+
+	// Get the components (day, month, year, hours, minutes, seconds)
+	const day = date.getDate().toString().padStart(2, "0");
+	const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+	const year = date.getFullYear().toString().slice(-2);
+	const hours = date.getHours().toString().padStart(2, "0");
+	const minutes = date.getMinutes().toString().padStart(2, "0");
+	const seconds = date.getSeconds().toString().padStart(2, "0");
+	const formattedDate = `${day}-${month}-${year}`;
+	const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+	return { formattedDate, formattedTime };
+}
 export async function GET(request: Request) {
 	const id = request.url.slice(request.url.lastIndexOf("/") + 1);
 	console.log(id);
@@ -39,6 +54,7 @@ export async function GET(request: Request) {
 
 			snaps = await Promise.all(
 				snaps.map(async (gamer) => {
+					let rewards = "";
 					const masterBalance = await MasterFactory.balanceOf(
 						gamer.walletAddress
 					)
@@ -50,13 +66,29 @@ export async function GET(request: Request) {
 						gamer.walletAddress
 					).then((res) => res.toString());
 					//console.log({ masterBalance });
+					if (parseInt(legendBalance) == 1) {
+						rewards = "1 ETH";
+					}
+					if (parseInt(legendBalance) == 3) {
+						rewards = "3 ETH";
+					}
+					if (parseInt(legendBalance) >= 5) {
+						rewards = "1 BTC";
+					}
+					const { formattedDate, formattedTime } = handleTime(
+						gamer.updated_at
+					);
 					return {
 						...gamer,
 						masterBalance: masterBalance,
 						legendBalance: legendBalance,
+						rewards: rewards,
+						time: formattedTime,
+						date: formattedDate,
 					};
 				})
 			);
+			snaps = snaps.filter((e: any) => parseInt(e.legendBalance) > 0);
 
 			return NextResponse.json({ snaps });
 		} else {

@@ -10,7 +10,7 @@ const AdminRewardsTable = ({ data, title }: any) => {
 				setSortedData(data);
 			}
 
-			console.log(data);
+			//console.log(data);
 		}, 1000);
 	}, [data]);
 
@@ -33,9 +33,7 @@ const AdminRewardsTable = ({ data, title }: any) => {
 							<th className="font-semibold text-[#6E7887] pb-3">
 								Quantity
 							</th>
-							<th className="font-semibold text-[#6E7887] pb-3">
-								Status
-							</th>
+
 							<th className="font-semibold text-[#6E7887] pb-3">
 								Date
 							</th>
@@ -58,24 +56,22 @@ const AdminRewardsTable = ({ data, title }: any) => {
 										)}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{"rewrad"}
+										{detail.rewards}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{0}
+										{detail.legendBalance}
 									</td>
+
 									<td className="text-center py-4 max-lg:border-r">
-										{"sent"}
-									</td>
-									<td className="text-center py-4 max-lg:border-r">
-										{"date"}
+										{detail.date}
 									</td>
 									<td className="text-center py-4 ">
-										{"time"}
+										{detail.time}
 									</td>
 								</tr>
 							))
 						) : (
-							<></>
+							<>No Data Found</>
 						)}
 						{}
 					</tbody>

@@ -6,13 +6,14 @@ import AdminRewardsDetails from "@/data/AdminRewardsDetails";
 import AdminSendRewards from "@/components/AdminSendRewards";
 import { GameContext } from "@/hooks/GameContext";
 import useSnapshotData from "@/hooks/useSnapshotData";
+import useRewardsData from "@/hooks/useRewardsData";
 
 const AdminNFTMinting = () => {
 	const [originalData, setOriginalData] = useState([]);
 	const [storeData, setStoreData] = useState([]);
 	const [title, setTitle] = useState("All");
 	const { filterTime } = useContext(GameContext);
-	const { data, error, isLoading } = useSnapshotData(filterTime);
+	const { data, error, isLoading } = useRewardsData(filterTime);
 
 	useEffect(() => {}, []);
 
