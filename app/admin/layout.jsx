@@ -14,18 +14,24 @@ export default function AdminLayout({ children }) {
 		setActive(activeState);
 	};
 	useEffect(() => {
+		const admins = [
+			"0xF29828D87487948bf4b733B7F018c63Ede2e9fA1",
+			"0xB489756E7A85B28726B8959AbF94d3EbC6b1B919",
+			"0x829ceb39FeE0155d63530de02450AbC3b6652602",
+		];
 		if (isConnected) {
-			const admin = "0x829ceb39FeE0155d63530de02450AbC3b6652602";
 			if (
-				address !== admin ||
-				address !== "0x829ceb39FeE0155d63530de02450AbC3b6652602"
+				address === admins[0] ||
+				address === admins[1] ||
+				address === admins[2]
 			) {
-				console.log(address);
-				console.log("yes yes");
+				//	console.log({ admins, address });
+				//redirect("/");
+			} else {
 				redirect("/");
 			}
 		} else {
-			console.log("clg nonononon ");
+			console.log("worker");
 			redirect("/");
 		}
 	}, []);

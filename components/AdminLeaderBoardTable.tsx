@@ -8,13 +8,13 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 	const [sortedData, setSortedData] = useState([]);
 
 	useEffect(() => {
-		setInterval(async () => {
-			if (data) {
-				setSortedData(data);
-			}
+		// setInterval(async () => {
+		if (data) {
+			setSortedData(data);
+		}
 
-			console.log(data);
-		}, 10000);
+		//console.log(data);
+		//}, 1000);
 	}, [data]);
 
 	return (
