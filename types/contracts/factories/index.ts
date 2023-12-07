@@ -3,3 +3,4 @@
 /* eslint-disable */
 export { SoulBound__factory } from "./SoulBound__factory";
 export { NftPass__factory } from "./NftPass__factory";
+export { Token__factory } from "./Token__factory";

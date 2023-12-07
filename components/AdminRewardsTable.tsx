@@ -1,5 +1,7 @@
 import { trimWalletAddress } from "@/helper/trim";
 import { useEffect, useState } from "react";
+import copyTextToClipboard from "@uiw/copy-to-clipboard";
+import { toast } from "react-toastify";
 
 const AdminRewardsTable = ({ data, title }: any) => {
 	const [sortedData, setSortedData] = useState([]);
@@ -50,7 +52,22 @@ const AdminRewardsTable = ({ data, title }: any) => {
 									<td className="text-center py-4 max-lg:border-r">
 										{index + 1}
 									</td>
-									<td className="text-center py-4 max-lg:border-r">
+									<td
+										onClick={(e) => {
+											const el =
+												e.currentTarget.textContent;
+											copyTextToClipboard(
+												detail.walletAddress!
+											);
+											toast.info(
+												`Text Copied ${trimWalletAddress(
+													detail.walletAddress
+												)}`
+											);
+											//	console.log({ el });
+										}}
+										className="text-center py-4 max-lg:border-r ss"
+									>
 										{trimWalletAddress(
 											detail.walletAddress
 										)}

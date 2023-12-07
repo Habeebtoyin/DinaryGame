@@ -3,6 +3,8 @@
 /* eslint-disable */
 export type { SoulBound } from "./SoulBound";
 export type { NftPass } from "./NftPass";
+export type { Token } from "./Token";
 export * as factories from "./factories";
 export { NftPass__factory } from "./factories/NftPass__factory";
 export { SoulBound__factory } from "./factories/SoulBound__factory";
+export { Token__factory } from "./factories/Token__factory";

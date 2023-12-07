@@ -6,7 +6,12 @@ import { GameContext } from "@/hooks/GameContext";
 import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import useAuthAdmin from "@/hooks/useAuthAdmin";
+import { Token__factory } from "@/types/contracts";
+import { useEthersSigner } from "@/sdk/ethersAdapter";
+import { parseEther } from "ethers";
+import { ETH } from "@/sdk/config";
 const AdminSendRewardForm = () => {
+	const signer = useEthersSigner();
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState();
 	const { authUserForSending, reqOnlyAdminAddress } = useAuthAdmin();
@@ -15,19 +20,23 @@ const AdminSendRewardForm = () => {
 	const [nftType, setNftType] = useState();
 	const [selectedValue, setSelectedValue] = useState("");
 
-	const handleSelectChange = (event) => {
+	const handleSelectChange = (event: any) => {
 		setSelectedValue(event.target.value);
 	};
 
-	reqOnlyAdminAddress();
+	async function handleSendReward(_to: any, _amount: any) {
+		const token = Token__factory.connect(ETH, signer);
+		return await token
+			.transfer(_to, parseEther(_amount))
+			.then((res) => {
+				toast.success("Reward transferrred Succedfully");
+			})
+			.catch((err) => {
+				toast.error("unable to Reward Chain Error");
+			});
+	}
 
-	useEffect(() => {
-		setTimeout(() => {
-			//console.log("Selected Value after timeout:", selectedValue);
-			// toast.success('selectedValue')
-			setNftType(selectedValue);
-		}, 50);
-	}, [selectedValue]);
+	reqOnlyAdminAddress();
 
 	return (
 		<div className="relative text-white flex items-center justify-center">
@@ -45,7 +54,7 @@ const AdminSendRewardForm = () => {
 							Wallet Address
 						</label>
 						<input
-							onChange={(e) => setTo(e.target.value)}
+							onChange={(e: any) => setTo(e.target.value)}
 							placeholder="Enter the recepient wallet address"
 							type="text"
 							className="border border-black w-[100%] p-3 rounded-[3px] outline-none"
@@ -74,7 +83,7 @@ const AdminSendRewardForm = () => {
 							Reward Quantity
 						</label>
 						<input
-							onChange={(e) => SetAmount(e.target.value)}
+							onChange={(e: any) => SetAmount(e.target.value)}
 							placeholder="Enter the reward quantity"
 							type="text"
 							className="border border-black w-[100%] p-3 rounded-[3px] outline-none"
@@ -84,7 +93,11 @@ const AdminSendRewardForm = () => {
 					<div className="my-6">
 						<input
 							onClick={async () => {
-								toast.info("No BTC/ETH contract Address");
+								if (!to || !amount) {
+									toast.error(" reciever and Amount Missing");
+								} else {
+									await handleSendReward(to, amount);
+								}
 							}}
 							type="button"
 							value="Send"
