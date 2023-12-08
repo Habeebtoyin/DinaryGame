@@ -92,7 +92,7 @@ const DashboardCards = () => {
 			if (userGameData) {
 				const { TotalScore } = userGameData;
 				//	console.log(1, { TotalScore });
-				if (TotalScore && parseInt(TotalScore) >= 500) {
+				if (TotalScore && parseInt(TotalScore) >= 5000000) {
 					//	console.log("true");
 					setNftMintable(true);
 				} else {
