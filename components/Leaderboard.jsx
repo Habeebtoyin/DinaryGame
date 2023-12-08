@@ -1,23 +1,21 @@
 "use client";
-import React, { Component,useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Link from "next/link";
 import LeaderBoardTab from "./LeaderBoardTab";
 import LeaderBoardDetails from "@/data/LeaderBoardDetails";
 import useLoadLeaderBoard from "@/hooks/useLoadLeaderBoard";
-
+import useSWR from "swr";
 export default function Leaderboard({ title, heading, subheading }) {
-	const [leaderboardData,setLeaderBoardData]=useState([])
-	const {createLeaderBoard,isLoading} = useLoadLeaderBoard();
+	const { createLeaderBoard } = useLoadLeaderBoard();
+	const [leaderboardData, setLeaderBoardData] = useState([]);
+	const { data, error, isLoading } = useSWR("/het", createLeaderBoard);
+
 	useEffect(() => {
-		const interval = setInterval(() => { 
-            createLeaderBoard().then(res=>{
-				setLeaderBoardData(res)
-			}) 
-        }, 10000)
-	  
-	}, [isLoading])
-	
-	 
+		// const interval = setInterval(() => {
+		setLeaderBoardData(data);
+		// }, 1000);
+	}, []);
+
 	return (
 		<div className="max-lg:my-[1em] my-[2em] px-[10%] text-center res-pad-in">
 			<h1 className="res-font font-bold text-[2.5rem]">{heading}</h1>
@@ -30,14 +28,27 @@ export default function Leaderboard({ title, heading, subheading }) {
 					</div>
 
 					<div className="rankings">
-						{console.log(isLoading)}
-						{leaderboardData !=undefined && leaderboardData.length>0 && leaderboardData?leaderboardData.map((el,id) => (
+						{console.log(data)}
+						{data != undefined && data.length > 0 && data ? (
+							data.map((el, id) => (
+								<>
+									<LeaderBoardTab
+										key={id}
+										id={id}
+										Score={el.bestScore}
+										walletAddress={el.walletAddress}
+									/>
+								</>
+							))
+						) : (
 							<>
-							
-							 <LeaderBoardTab key={id} id={id} Score={el.bestScore} walletAddress={el.walletAddress} />
+								{isLoading ? (
+									<>Loading Leaderboard</>
+								) : (
+									<>No Data Found</>
+								)}
 							</>
-							
-						)):<>No Data Found</>}
+						)}
 					</div>
 				</div>
 			</div>

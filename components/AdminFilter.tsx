@@ -25,8 +25,8 @@ const AdminFilter = ({ onFilter, onRefresh }: any) => {
 						>
 							<option value="all">All Game Modes</option>
 							<option value="Denary">Denary</option>
-							<option value="PVP">PVP</option>
-							<option value="Endless">Endless</option>
+							{/* <option value="PVP">PVP</option>
+							<option value="Endless">Endless</option> */}
 						</select>
 					</div>
 					{/* <div className="bg-white p-1 rounded-sm cursor-pointer" onClick={onRefresh}>Refresh</div> */}

@@ -53,7 +53,7 @@ const AdminLeaderBoardTable = ({ data, title }: any) => {
 										{index + 1}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
-										{"Endless"}
+										{"Denary"}
 									</td>
 									<td className="text-center py-4 max-lg:border-r">
 										{trimWalletAddress(

@@ -34,6 +34,7 @@ const AdminLeaderBoard = () => {
 	const refresh = () => {
 		setTitle("All-Time Leaderboard");
 	};
+	console.log({ isLoading });
 	useEffect(() => {}, [error, isLoading]);
 
 	return (

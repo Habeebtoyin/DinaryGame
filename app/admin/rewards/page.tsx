@@ -29,6 +29,7 @@ const AdminNFTMinting = () => {
 			setTitle(selected);
 		}
 	};
+	console.log({ isLoading });
 
 	const refresh = () => {
 		setStoreData(originalData);

@@ -9,7 +9,7 @@ const fetcher = (time: string) =>
 	getRewardBoardforTime(time).then((res) => res);
 export default function useRewardsData(time: string) {
 	const { data, error, isLoading } = useSWR(`${time}`, fetcher);
-	console.log({ data });
+	console.log("rewrads", { data });
 
 	return { data, error, isLoading };
 }

@@ -5,7 +5,7 @@ export default function useLoadLeaderBoard() {
 	const [leaderBoard, setleaderBoard]: any[] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	//get all users
-	async function createLeaderBoard() {
+	async function createLeaderBoard(args: any) {
 		setIsLoading(true);
 		const allUsers = await getAllData();
 		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
