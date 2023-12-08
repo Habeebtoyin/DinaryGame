@@ -33,7 +33,7 @@ export async function GET(request: Request) {
 		const res: any = (
 			await getAllTimeLeaderBoardSnapshot()
 		).TransactionsSnapShot?.filter((items) => {
-			console.log(items);
+			//console.log(items);
 			// console.log(
 			// 	"here",
 			// 	(parseInt(items.timestamp) / denom).toFixed(0),

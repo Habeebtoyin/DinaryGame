@@ -1,13 +1,19 @@
-const PVPHero = () => {
+"use client";
+import { useCountdown } from "@/hooks/useCountdown";
+import { useEffect } from "react";
+const DenaryHero = () => {
+	const toDate = new Date().setHours(12, 0, 0, 0);
+	//console.log({ toDate });
+	const [days, hours, minutes, seconds] = useCountdown(toDate);
 	return (
 		<div>
 			<div className="play hero max-lg:mt-[2rem] mt-[3.7rem] relative bg-[#E5EFFF] text-white max-lg:min-h-[70vh] min-h-[30vw] flex flex-col items-center justify-center">
 				<h1 className="text-[3rem] text-black font-bold my-4">
-					Indices PVP Game Mode
+					Indices Denary Game Mode
 				</h1>
 				<p className="w-[50%] text-center text-[1.2rem] text-gray-700 tracking-[.2px] font-normal">
-					Go head-to-head against another player in an intense 12288
-					showdown!
+					Compete against others in Denary Mode. Climb the Leaderboard
+					and win rewards!
 				</p>
 
 				<p className="mt-[3rem] w-[50%] text-center text-[1.2rem] text-gray-700 tracking-[.2px] font-normal">
@@ -18,7 +24,7 @@ const PVPHero = () => {
 					<div className="w-[22%] ">
 						<div className="flex items-center">
 							<h1 className="text-[3rem] text-[#0045AD] font-bold">
-								00
+								{days}
 							</h1>
 							<p className="text-[3rem] text-[#0045AD] font-bold max-lg:pl-2 pl-5">
 								:
@@ -32,7 +38,7 @@ const PVPHero = () => {
 					<div className="w-[22%]">
 						<div className="flex items-center">
 							<h1 className="text-[3rem] text-[#0045AD] font-bold">
-								00
+								{hours}
 							</h1>
 							<p className="text-[3rem] text-[#0045AD] font-bold max-lg:pl-2 pl-5">
 								:
@@ -46,7 +52,7 @@ const PVPHero = () => {
 					<div className="w-[22%] ">
 						<div className="flex items-center">
 							<h1 className="text-[3rem] text-[#0045AD] font-bold">
-								00
+								{minutes}
 							</h1>
 							<p className="text-[3rem] text-[#0045AD] font-bold max-lg:pl-2 pl-5">
 								:
@@ -62,7 +68,7 @@ const PVPHero = () => {
 
 					<div className="w-[22%] ">
 						<h1 className="text-[3rem] text-[#0045AD] font-bold">
-							00
+							{seconds}
 						</h1>
 						<p className="text-left text-[1.2rem] text-gray-700 tracking-[.2px] font-normal">
 							seconds
@@ -74,4 +80,4 @@ const PVPHero = () => {
 	);
 };
 
-export default PVPHero;
+export default DenaryHero;

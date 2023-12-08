@@ -12,7 +12,7 @@ const MasterFactory = SoulBound__factory.connect(MASTER_NFT, JsonProvider);
 const LegendaryFactory = SoulBound__factory.connect(LEGENDRY_NFT, JsonProvider);
 export async function GET(request: Request) {
 	const id = request.url.slice(request.url.lastIndexOf("/") + 1);
-	console.log(id);
+	//console.log(id);
 	const denom = 1000 * 60 * 60 * 24;
 	try {
 		const res: any = (
