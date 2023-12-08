@@ -2,9 +2,24 @@
 import { useCountdown } from "@/hooks/useCountdown";
 import { useEffect } from "react";
 const DenaryHero = () => {
-	const toDate = new Date().setHours(12, 0, 0, 0);
-	//console.log({ toDate });
-	const [days, hours, minutes, seconds] = useCountdown(toDate);
+	let now = new Date();
+	let currentTime = now.getTime();
+
+	// Set the target time to 12:00 PM
+	let targetTime = new Date();
+	const to = targetTime.setHours(12, 0, 0, 0); // Set hours to 12 and minutes/seconds/milliseconds to 0
+
+	if (now.getHours() >= 12) {
+		console.log("yes", { to });
+		// If the current time is already past 12 PM, set the target time to 12 PM of the next day
+		targetTime.setDate(targetTime.getDate() + 1);
+		// console.log("to hours", targetTime.getHours());
+		// console.log("to date", targetTime.getDate());
+	}
+
+	var timeUntilNext12PM = targetTime.getTime();
+	console.log({ timeUntilNext12PM });
+	const [days, hours, minutes, seconds] = useCountdown(timeUntilNext12PM);
 	return (
 		<div>
 			<div className="play hero max-lg:mt-[2rem] mt-[3.7rem] relative bg-[#E5EFFF] text-white max-lg:min-h-[70vh] min-h-[30vw] flex flex-col items-center justify-center">
