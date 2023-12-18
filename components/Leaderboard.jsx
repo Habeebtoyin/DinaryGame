@@ -30,16 +30,20 @@ export default function Leaderboard({ title, heading, subheading }) {
 					<div className="rankings">
 						{console.log(data)}
 						{data != undefined && data.length > 0 && data ? (
-							data.map((el, id) => (
-								<>
-									<LeaderBoardTab
-										key={id}
-										id={id}
-										Score={el.bestScore}
-										walletAddress={el.walletAddress}
-									/>
-								</>
-							))
+							data.map((el, id) =>
+								id <= 9 ? (
+									<>
+										<LeaderBoardTab
+											key={id}
+											id={id}
+											Score={el.GameOverScore}
+											walletAddress={el.walletAddress}
+										/>
+									</>
+								) : (
+									<></>
+								)
+							)
 						) : (
 							<>
 								{isLoading ? (

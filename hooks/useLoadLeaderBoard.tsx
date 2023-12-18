@@ -13,14 +13,12 @@ export default function useLoadLeaderBoard() {
 		const thirtyMinutesAgo =
 			Math.floor(new Date().getTime() / 1000) - 30 * 60;
 		let leadGamers = allUsers.GamePassUsers?.filter(
-			(el) =>
-				el.updated_at >= twentyFourHoursAgoEpochTime &&
-				parseInt(el.bestScore) > 0
+			(el) => parseInt(el.GameOverScore) > 0
 		);
 		// console.log({ leadGamers });
 		if (leadGamers && leadGamers.length > 0 && leadGamers != undefined) {
 			leadGamers.sort(
-				(a, b) => parseInt(b.bestScore) - parseInt(a.bestScore)
+				(a, b) => parseInt(b.GameOverScore) - parseInt(a.GameOverScore)
 			);
 		}
 		setIsLoading(false);
