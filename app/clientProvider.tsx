@@ -1,20 +1,36 @@
 "use client";
-import "@rainbow-me/rainbowkit/styles.css";
+// import "@rainbow-me/rainbowkit/styles.css";
 import { useIsMounted } from "../hooks/useIsMounted";
+// import {
+// 	RainbowKitProvider,
+// 	getDefaultWallets,
+// 	connectorsForWallets,
+// 	darkTheme,
+// } from "@rainbow-me/rainbowkit";
+// import {
+// 	argentWallet,
+// 	trustWallet,
+// 	ledgerWallet,
+// } from "@rainbow-me/rainbowkit/wallets";
+// import { configureChains, createConfig, WagmiConfig } from "wagmi";
+// import { goerli, mainnet, baseSepolia, base } from "wagmi/chains";
+// import { publicProvider } from "wagmi/providers/public";
+
+
+import '@rainbow-me/rainbowkit/styles.css';
 import {
-	RainbowKitProvider,
-	getDefaultWallets,
-	connectorsForWallets,
-	darkTheme,
-} from "@rainbow-me/rainbowkit";
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
 import {
-	argentWallet,
-	trustWallet,
-	ledgerWallet,
-} from "@rainbow-me/rainbowkit/wallets";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { goerli, mainnet, baseSepolia, base } from "wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
+  base,
+  baseSepolia,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
 
 // const nautilus = {
 // 	id: 22222,
@@ -63,41 +79,48 @@ import { publicProvider } from "wagmi/providers/public";
 // 	},
 // };
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
-	[baseSepolia, base],
-	[publicProvider()]
-);
+// const { chains, publicClient, webSocketPublicClient } = configureChains(
+// 	[baseSepolia, base],
+// 	[publicProvider()]
+// );
 
-const projectId = "f48efad0c8c0c6656fbb202708700e4d";
-
-const { wallets } = getDefaultWallets({
-	appName: "Dyleum",
-	projectId,
-	chains,
+// const projectId = "f48efad0c8c0c6656fbb202708700e4d";
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'f48efad0c8c0c6656fbb202708700e4d',
+  chains: [baseSepolia, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
-const demoAppInfo = {
-	appName: "Dyleum",
-};
+// const { wallets } = getDefaultWallets({
+// 	appName: "Dyleum",
+// 	projectId,
+// 	chains,
+// });
 
-const connectors = connectorsForWallets([
-	...wallets,
-	{
-		groupName: "Other",
-		wallets: [
-			argentWallet({ projectId, chains }),
-			trustWallet({ projectId, chains }),
-			ledgerWallet({ projectId, chains }),
-		],
-	},
-]);
+// const demoAppInfo = {
+// 	appName: "Dyleum",
+// };
 
-const wagmiConfig = createConfig({
-	autoConnect: true,
-	connectors,
-	publicClient,
-	webSocketPublicClient,
-});
+// const connectors = connectorsForWallets([
+// 	...wallets,
+// 	{
+// 		groupName: "Other",
+// 		wallets: [
+// 			argentWallet({ projectId, chains }),
+// 			trustWallet({ projectId, chains }),
+// 			ledgerWallet({ projectId, chains }),
+// 		],
+// 	},
+// ]);
+
+// const wagmiConfig = createConfig({
+// 	autoConnect: true,
+// 	connectors,
+// 	publicClient,
+// 	webSocketPublicClient,
+// });
+const queryClient = new QueryClient();
 
 export default function ClientProvider({
 	children,
@@ -106,15 +129,25 @@ export default function ClientProvider({
 }) {
 	const mounted = useIsMounted();
 	return (
-		<WagmiConfig config={wagmiConfig}>
-			<RainbowKitProvider
-				chains={chains}
-				appInfo={demoAppInfo}
-				theme={darkTheme()}
-				coolMode
-			>
-				{mounted && children}
-			</RainbowKitProvider>
-		</WagmiConfig>
+		// <WagmiConfig config={wagmiConfig}>
+	// 	<WagmiProvider config={config}>
+	// 		<RainbowKitProvider
+	// 			chains={chains}
+	// 			appInfo={demoAppInfo}
+	// 			theme={darkTheme()}
+	// 			coolMode
+	// 		>
+	// 			{mounted && children}
+	// 		</RainbowKitProvider>	
+	// 	</WagmiConfig>
+	<WagmiProvider config={config}>
+	  <QueryClientProvider client={queryClient}>
+		<RainbowKitProvider>
+		  {mounted && children}
+		</RainbowKitProvider>
+	  </QueryClientProvider>
+	</WagmiProvider>
+	// </WagmiConfig>
 	);
+
 }
