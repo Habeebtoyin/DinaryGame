@@ -32,7 +32,7 @@ const NoMoves = ({ score, trackingScore }) => {
 	const buyGamePass = async () => {
 		const currentEpochTime = Math.floor(new Date().getTime() / 1000);
 		setisLoading(!isLoading);
-		await GamePass.mint(address.string,1)
+		await GamePass.BuyMove()
 			.then(async (res) => {
 				await updateUserGameData(address.toString(), {
 					moveUsed: "0",

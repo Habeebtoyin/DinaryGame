@@ -29,7 +29,7 @@ export default class GamePassNftContract {
 			await this.signer.getAddress(),
 			1,
 			{
-				value: parseEther("30"),
+				value: parseEther("0.001"),
 			}
 		);
 	}
