@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { ethers } from "ethers";
 
 const JsonProvider = new ethers.JsonRpcProvider(
-	"https://api.nautilus.nautchain.xyz"
+	"https://base-sepolia-rpc.publicnode.com"
 );
 
 const MasterFactory = SoulBound__factory.connect(MASTER_NFT, JsonProvider);

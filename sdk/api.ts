@@ -1,9 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
 import { AddressLike } from "ethers";
 
-const supabaseUrl = "https://dosiqrryrnpwfvzxcjls.supabase.co";
+// const supabaseUrl = "https://dosiqrryrnpwfvzxcjls.supabase.co";
+const supabaseUrl = "https://zlbthefddvornyklqhtr.supabase.co";
+// const supabaseKey =
+// 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvc2lxcnJ5cm5wd2Z2enhjamxzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4ODQ3NjE3NSwiZXhwIjoyMDA0MDUyMTc1fQ.8iLeg9tVyIhYTztxlWwZfqfDiQIhO-NQ9cz3Pg0O9BA";
 const supabaseKey =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvc2lxcnJ5cm5wd2Z2enhjamxzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4ODQ3NjE3NSwiZXhwIjoyMDA0MDUyMTc1fQ.8iLeg9tVyIhYTztxlWwZfqfDiQIhO-NQ9cz3Pg0O9BA";
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsYnRoZWZkZHZvcm55a2xxaHRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNTMzMjksImV4cCI6MjA3NDkyOTMyOX0.VvFvwh-kz1zf3L7Dfd7r7AXsQ2Yb-BCBWsXrRCouuuA";
 const supabase = createClient(supabaseUrl, supabaseKey);
 //get user data
 export async function getAllData() {

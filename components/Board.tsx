@@ -52,16 +52,10 @@ const BoardView = ({ closeGame }: any) => {
 				);
 				let newBoard = boardClone.move(direction);
 				console.log("mover here");
-				if (
-					parseInt(userGameData.moveBought) < 1 &&
-					parseInt(userGameData.moveUsed) > 30
-				) {
-					setIsMoveable(true);
-				} else {
-					setMoveCounter((e: any) => e + 1);
-
-					setBoard(newBoard);
-				}
+				
+				// Allow continuous gameplay - always increment move counter and update board
+				setMoveCounter((e: any) => e + 1);
+				setBoard(newBoard);
 			}
 		} else {
 			setErrorMsg("Wallet is Not Connect You can not Play");
@@ -80,16 +74,10 @@ const BoardView = ({ closeGame }: any) => {
 					board
 				);
 				let newBoard = boardClone.move(direction);
-				if (
-					parseInt(userGameData.moveBought) < 1 &&
-					parseInt(userGameData.moveUsed) > 30
-				) {
-					setIsMoveable(true);
-				} else {
-					setMoveCounter((e: any) => e + 1);
-
-					setBoard(newBoard);
-				}
+				
+				// Allow continuous gameplay - always increment move counter and update board
+				setMoveCounter((e: any) => e + 1);
+				setBoard(newBoard);
 			}
 		} else {
 			setErrorMsg("Wallet is Not Connect You can not Play");
@@ -128,11 +116,7 @@ const BoardView = ({ closeGame }: any) => {
 		calls();
 	}, [board.score]);
 	useEffect(() => {
-		if (moveCounter >= 31 || userGameData.moveBought === "0") {
-			setIsMoveable(true);
-			callsInMovable();
-		}
-
+		// Remove move restriction for continuous gameplay
 		console.log("here", board.score);
 	}, [moveCounter]);
 	useEffect(() => {
@@ -186,13 +170,14 @@ const BoardView = ({ closeGame }: any) => {
 					<div className="board">
 						{cells}
 						{tiles}
-
+                        
 						<GameOverlay onRestart={onRestart} board={board} />
+						
 						{/* {()=>{if(isMoveable===true)  alert("You have no Moves Any Longer")}} */}
 
 						{/* {JSON.stringify(board.hasLost())} */}
 
-						{isMoveable && (
+						{/* {isMoveable && (
 							<NoMoves
 								score={userGameData.Score.toString()}
 								trackingScore={() => {
@@ -202,8 +187,8 @@ const BoardView = ({ closeGame }: any) => {
 											: 0;
 									}
 								}}
-							/>
-						)}
+							/> */}
+						{/* )} */}
 					</div>
 					<div className="mobile">
 						<div className="flex gap-3 justify-end items-end p-0 mt-4">
